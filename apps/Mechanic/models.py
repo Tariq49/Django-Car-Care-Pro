@@ -12,3 +12,4 @@ from django.db import models
 # skill
 # salary
 # status
+# years of experience
