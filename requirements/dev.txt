@@ -1,0 +1,5 @@
+-r base.txt
+ipython==8.25.0
+psycopg==3.2.1
+psycopg-binary==3.2.1
+django-multiselectfield==0.1.13
