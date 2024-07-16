@@ -6,7 +6,6 @@
 
 - Develop a technician approval process based on skill assessments and mechanic requests.
 - Develop a user-friendly interface for customers to easily register, log in, and request vehicle servicing.
-- Develop a technician approval process based on skill assessments and mechanic requests.
 - Establish a feedback system for customers to provide reviews and suggestions regarding service quality.
 - Enable customers to view and manage invoices and track the progress of their vehicle repairs.
 
