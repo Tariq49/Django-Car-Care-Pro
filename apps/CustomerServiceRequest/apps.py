@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class CustomerrequestConfig(AppConfig):
+class CustomerservicerequestConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "CustomerRequest"
+    name = "CustomerServiceRequest"
