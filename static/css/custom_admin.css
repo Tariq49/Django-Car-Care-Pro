@@ -1,0 +1,97 @@
+body {
+    background-image: url('/static/images/images.jpeg');
+    background-size: cover; /* Fit the entire image within the header */
+    background-repeat: no-repeat;
+    background-position: center;
+    color:#59bb5e
+   
+}
+
+#header {
+  
+    background-color: #34df348c; /* Dark gray header */
+    color: white; /* White text */
+}
+
+.module caption {
+    background: rgb(98, 207, 98);
+}
+
+
+h1{
+
+    color: white;
+    
+}
+
+a.section {
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    opacity: 0;
+    animation: fadeIn 1s forwards; /* Initial fadeIn animation */
+    display: inline-block;
+    margin-bottom: 2px;
+}
+
+a.section:hover {
+    background-color: #65ee6c;
+    animation: moveRight 0.3s forwards, fadeIn 1s forwards;; /* Add fadeIn animation on hover */
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes moveRight {
+    to {
+        transform: translateX(20px);
+    }
+}
+
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+    background: #34df348c ;
+}
+
+#site-name a:link, #site-name a:visited {
+    color: white;
+}
+
+#nav-sidebar {
+    
+    background-image: url('/static/images/images.jpeg'); 
+    background-repeat: no-repeat;
+    background-size: cover;
+}    
+
+div.breadcrumbs {
+
+    background: #53bd538c;
+        
+}    
+
+a:link, a:visited {
+    color: #59bb5e;
+
+}
+
+thead th a:link, thead th a:visited {
+
+    color: #4240d48c;
+    font-style: italic;
+}    
+
+thead th,
+tfoot td {
+    color:   #4240d48c;
+    font-style: italic;
+}       
+
+td, th {
+    border-bottom: 1px solid rgb(51, 209, 51);
+
+}

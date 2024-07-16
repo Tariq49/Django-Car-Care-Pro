@@ -1,0 +1,11 @@
+/* custom_admin.css */
+body {
+    background-color: #bfd6b9; /* Light gray background */
+   
+}
+
+/* Example: Change the color of the header */
+#header {
+    background-color: #58da588c; /* Dark gray header */
+    color: white; /* White text */
+}
