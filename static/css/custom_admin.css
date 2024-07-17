@@ -37,7 +37,7 @@ a.section {
 }
 
 a.section:hover {
-    background-color: #65ee6c;
+    background-color: #6ae6c1;
     animation: moveRight 0.3s forwards, fadeIn 1s forwards;; /* Add fadeIn animation on hover */
 }
 
@@ -95,3 +95,8 @@ td, th {
     border-bottom: 1px solid rgb(51, 209, 51);
 
 }
+
+.object-tools a:link, .object-tools a:visited {
+
+    background: #53bd538c;
+    }    
