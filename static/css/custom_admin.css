@@ -3,8 +3,19 @@ body {
     background-size: cover; /* Fit the entire image within the header */
     background-repeat: no-repeat;
     background-position: center;
-    color:#59bb5e
+    
    
+}
+
+h1 {
+
+
+    margin-top: 50px; /* Adjust as needed */
+    text-align: center; /* Center text horizontally */
+    font-size: 2.5em; /* Adjust font size as needed */
+    color: #3fd859; /* Optional: Text color */
+
+    
 }
 
 #header {
@@ -18,9 +29,16 @@ body {
 }
 
 
-h1{
 
-    color: white;
+
+h2 {
+
+   
+    margin-top: 50px; /* Adjust as needed */
+    text-align: center; /* Center text horizontally */
+    font-size: 2.5em; /* Adjust font size as needed */
+    color: #153bc4; /* Optional: Text color */
+
     
 }
 
@@ -66,6 +84,7 @@ a.section:hover {
     background-image: url('/static/images/images.jpeg'); 
     background-repeat: no-repeat;
     background-size: cover;
+   
 }    
 
 div.breadcrumbs {
@@ -100,3 +119,15 @@ td, th {
 
     background: #53bd538c;
     }    
+
+
+.button.default, 
+input[type=submit].default, .submit-row input.default {
+    background:  rgb(51, 209, 51);
+    font-weight: 400;
+}
+
+#content-main {
+    background-color: white;
+
+}
