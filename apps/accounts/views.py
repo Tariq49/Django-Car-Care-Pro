@@ -29,3 +29,9 @@ def login_view(request):
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
+
+def about_us(request):
+    return render(request, 'about_us.html')
+
+def website(request):
+    return render(request, 'website.html')
