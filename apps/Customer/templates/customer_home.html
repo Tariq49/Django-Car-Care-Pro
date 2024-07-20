@@ -1,8 +1,12 @@
+{% load static %} 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Customer Home</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bubbles.css' %}">
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'js/bubbles.js' %}"></script>
     <style>
         body {
             background-image: url('/static/images/customer.jpg');
@@ -215,15 +219,17 @@
        
         
     </style>
+    
 </head>
 <body>
-    {% load static %} 
+    
     <div class="background-blur" id="backgroundBlur"></div>
     <div class="title-bar">
         <img src="{% static 'images/logo.jpg' %}" alt="Logo">
         <h1>Customer Portal</h1> 
         
     </div>
+    
     <div class="main-content">
         <div class="box" id="box1">Login</div>
         <div class="box" id="box2">Sign Up</div>
@@ -270,7 +276,7 @@
         document.getElementById('box2').addEventListener('click', function() {
             document.getElementById('signupForm').style.display = 'block';
             document.getElementById('overlay').style.display = 'block';
-            document.getElementById('backgroundBlur').style.display = 'block';
+            document.getElementById('backgroundBlur').style.display = 'blur(10px)';
         });
         document.getElementById('closeLoginBtn').addEventListener('click', function() {
             document.getElementById('loginForm').style.display = 'none';
@@ -290,6 +296,7 @@
         
        
     </script>
+   
 </body>
 </html>
 
