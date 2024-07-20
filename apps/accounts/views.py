@@ -1,7 +1,7 @@
 # apps/accounts/views.py
 
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.http import HttpResponse
 
@@ -35,3 +35,7 @@ def about_us(request):
 
 def website(request):
     return render(request, 'website.html')
+
+def logout_view(request):
+    logout(request)  
+    return redirect('home') 
