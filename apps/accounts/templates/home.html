@@ -9,16 +9,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         .welcome-heading {
-            font-size: 3em; /* Adjust size as needed */
+            font-size: 1.2em; /* Adjust size as needed */
             font-weight: bold;
             margin: 0;
             padding: 0;
             align:center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Optional text shadow for better readability */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9); /* Optional text shadow for better readability */
         }
         .swiper-container {
+           
             width: 100%;
-            height: calc(100vh - 100px); /* Adjust height to leave space for the footer */
+            height: calc(100vh - 120px); /* Adjust height to leave space for the footer */
             position: relative;
         }
         .swiper-slide {
@@ -46,7 +47,7 @@
             background-color: #EAF19C; /* Green background */
             border: none;
             color: black;
-            padding: 15px 30px; /* Increase size */
+            padding: 10px 30px; /* Increase size */
             text-align: center;
             text-decoration: none;
             display: inline-block;
@@ -58,10 +59,28 @@
         }
         .background-container{
             background:beige;
+            position: relative; 
+            overflow: hidden; 
+            padding: 0px;
         }
         .sub-heading {
             color:Green;
             margin-left:30px;
+            font-weight : Semi;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+        }
+        .header-content {
+            display: flex;
+            align-items: center; /* Center align items vertically */
+            justify-content: space-between; /* Space items horizontally */
+            margin-bottom: 20px; /* Space below the header content */
+            padding: 0 20px; /* Padding on the sides */
+          
+        }
+        .header-items {
+            display: flex;
+            align-items: center; /* Center items vertically */
+            gap: 20px; /* Space between items */
         }
         .footer-content {
             position: absolute;
@@ -86,22 +105,27 @@
         .footer-content a:hover {
             text-decoration: underline;
         }
+       
     </style>
 </head>
 <body>
     {% load static %}
     <div class="background-container">
+        <div class="header-content">
+            <div class="header-items">
 
-        <div class="overlay">
-            <h1 class="welcome-heading">Welcome to Car Care Pro</h1>
-            <h2 class="sub-heading">A Premium Dealing Hub....</h2>
-            
+                <div class="welcome-heading">
+                    <h1>Welcome to Car Care Pro</h1>
+                </div>   
+                
+            </div>
+         
             <div class="button-container">
                 <button onclick="showContent('customer')">Customer</button>
                 <button onclick="showContent('mechanic')">Mechanic</button>
             </div>
-        
         </div>
+        
 
         
         <!-- Swiper -->
@@ -124,10 +148,12 @@
             
             <div class="footer-content">
                
-                <a href="http://www.carcarepro.org" title="Visit our website"><i class="fas fa-globe"></i> www.carcarepro.org</a>
+                <a href="https://dribbble.com/shots/23471795-Car-Service-Website-Design" title="Visit our website"><i class="fas fa-globe"></i> www.carcarepro.org</a>
                 <a href="mailto:carcarepro@gmail.com" title="Send us an email"><i class="fas fa-envelope"></i> carcarepro@gmail.com</a>
                 <a href="tel:+4915734001700" title="Call us"><i class="fas fa-phone"></i> +49 1573 4001700</a>
                 <a href="#" title="Our Address"><i class="fas fa-map-marker-alt"></i> 123 Car Care St, Auto City, AC 45678</a>
+                <a href="{% url 'about_us' %}" title="About Us"><i class="fas fa-info-circle"></i> About Us</a>
+
                
             </div>
             <div class="swiper-pagination"></div>
