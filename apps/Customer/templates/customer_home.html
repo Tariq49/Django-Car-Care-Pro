@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Home</title>
+    <style>
+        body {
+            background-image: url('/static/images/customer.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100vh; /* Ensure the body takes the full viewport height */
+            width: 100vw; /* Ensure the body takes the full viewport width */
+            overflow: hidden; 
+        }
+      
+        .title-bar {
+            background-color: #a8d7a4;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            height:10%;
+            top: 0;
+            box-sizing: border-box;
+            z-index: 1000; 
+            display:flex;
+        }
+        .logo {
+            position: absolute;
+            left: 20px; 
+        }
+        .title-bar img {
+            height: 60px; 
+            width: 60px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+        }
+        
+        .title-bar h1 {
+            margin-left:40px;
+            color: #0ad517;
+            margin-left
+            font-size: 24px; 
+        }
+        .main-content {
+            padding-top: 400px; 
+            padding-left: 600px;
+        }
+        .box-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Center boxes within container */
+            position: relative;
+        }
+        .box {
+            width: 250px; /* Width of the box */
+            height: 40px; /* Height of the box */
+            background-color: #73e266; /* Box color */
+            border-radius: 50px; /* Rounds the corners of the box */
+            bottom: -180px; /* Initial position off the bottom of the screen */
+            animation: moveToCenter 2s ease-out forwards; /* Animation */
+            font-size: 20px; 
+            color:white;
+            padding-top: 20px;
+            text-align: center; 
+        }
+       
+        @keyframes moveToCenter {
+            from {
+                bottom: -180px; /* Start from below the screen */
+                opacity: 0; /* Start with invisible */
+                transform: scale(0.5); /* Start smaller */
+            }
+            to {
+                bottom: calc(100% - 75px); /* Move to the vertical center of the screen */
+                opacity: 1; /* End with visible */
+                transform: scale(1); /* End at normal size */
+            }
+        }
+        
+        .box:nth-child(1) {
+            transform: translateY(0); /* Start at initial position */
+        }
+        .login-form {
+            display: none; /* Hidden initially */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Center form */
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000; /* Ensure it is on top of other content */
+            width:500px;
+            height:300px;
+        }
+        .login-form h2 {
+            margin-top: 0;
+        }
+        .login-form input {
+            display: block;
+            width: 95%;
+            padding: 10px;
+            margin: 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        .login-form button:hover {
+            background-color: #2980b9;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: none; /* No background */
+            border: none; /* No border */
+            color: black; /* Text color */
+            font-size: 24px; /* Font size for the close icon */
+            cursor: pointer; /* Pointer cursor on hover */
+            text-decoration: none;
+            line-height: 1; /* Align icon properly */
+            
+        }
+        .close-btn:hover {
+            color: #e74c3c; /* Color change on hover */
+        }
+        .overlay {
+            display: none; /* Hidden initially */
+            position: fixed; /* Cover the whole screen */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+            z-index: 999; /* Below the login form but above other content */
+            backdrop-filter: blur(5px); /* Optional: Apply a blur effect */
+        }
+        
+    </style>
+</head>
+<body>
+    {% load static %} 
+    
+    <div class="title-bar">
+        <img src="{% static 'images/logo.jpg' %}" alt="Logo">
+        <h1>Customer Portal</h1> 
+        
+    </div>
+    <div class="main-content">
+        <div class="box" id="box1">Login</div>
+       
+    </div>
+    <div class="login-form" id="loginForm">
+        <button class="close-btn" id="closeBtn">&times;</button>
+        <h2>Login</h2>
+        <form>
+            <input type="text" placeholder="Username" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <script>
+        // JavaScript to handle box click and show the login form
+        document.getElementById('box1').addEventListener('click', function() {
+            document.getElementById('loginForm').style.display = 'block';
+        });
+        document.getElementById('closeBtn').addEventListener('click', function() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        });
+        // JavaScript to handle overlay click to close the login form
+        document.getElementById('overlay').addEventListener('click', function() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
+
