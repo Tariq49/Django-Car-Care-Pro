@@ -27,11 +27,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image:url('/static/images/mec.png'); /* Path to your image */
+            background-image:url('/static/images/mec.jpg'); 
             background-size: cover;
             background-position: center;
-            filter: blur(15px); /* Adjust blur radius as needed */
-            z-index: -1; /* Send the blurred image behind the content */
+            
+            z-index: -1; 
         }
         .header, .footer {
             background: beige;
@@ -40,8 +40,8 @@
         }
         .content {
             padding: 20px;
-            max-width: 800px; /* Limit the width for better readability */
-            margin: 0 auto;
+            max-width: 800px; 
+            margin: 20px;
         }
         .content h1 {
             text-align: center;
@@ -80,20 +80,48 @@
             background: #eee;
             text-align: center;
             padding: 20px;
-            margin-top: auto; /* Push the footer to the bottom */
+            margin-top: auto; 
         }
         h2 {
             text-align: center;
-            color: white; /* White color for the h2 heading */
+            color: white;
             margin-top: 40px;
+        }
+        h1{
+            color:orange;
+        }
+        .logo {
+            position: absolute;
+            left: 20px; 
+            height: 60px; 
+            width: 60px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            margin-top:12px;
+        }
+        .back-icon{
+            position: absolute;
+            margin-top:30px;
+            margin-left:800px;
+            font-weight: bold;
+            font-size:20px;
+            text-decoration: none;
+            color:orange;
         }
     </style>
 </head>
 <body>
     {% load static %} 
     <div class="background-container">
+       
         <div class="header">
+            <img class="logo" src="{% static 'images/logo.jpg' %}" alt="Logo">
+            <a class="back-icon" href="{% url 'home' %}"><i class="fas fa-arrow-left"></i> Home</a>
             <h1>About Us</h1>
+           
+            <link rel="stylesheet" type="text/css" href="{% static 'css/bubbles.css' %}">
+            <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+            <script src="{% static 'js/bubbles.js' %}"></script>
         </div>
     
         <div class="content">

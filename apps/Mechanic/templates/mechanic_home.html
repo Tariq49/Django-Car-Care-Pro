@@ -9,7 +9,7 @@
     <script src="{% static 'js/bubbles.js' %}"></script>
     <style>
         body {
-            background-image: url('/static/images/customer.jpg');
+            background-image: url('/static/images/mechanic.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -22,7 +22,7 @@
         }
       
         .title-bar {
-            background-color: #a8d7a4;
+            background-color: #343493;
             padding: 10px 20px;
             display: flex;
             align-items: center;
@@ -65,7 +65,7 @@
         .box {
             width: 200px; 
             height: 32px;
-            background-color: #73e266; 
+            background-color: #343493; 
             border-radius: 50px; 
             bottom: -180px; 
             animation: moveToPosition 2s ease-out forwards;
@@ -188,11 +188,6 @@
             border:none;
         }
 
-        .logsub:hover{
-            color:green;
-            
-        }
-
         .signbtn{
             margin-left: 170px;
             width:150px;
@@ -259,28 +254,19 @@
             margin-left:1200px;
             margin-top:60px;
             font-weight:bold;
-            color:black;
+            color:white;
         }
-        .back-icon{
-            position: absolute;
-            margin-top:0px;
-            margin-left:1800px;
-            font-weight: bold;
-            font-size:16px;
-            color:black;
-           
-        }
+        
     </style>
     
 </head>
 <body>
     
-    <div class="background-blur" id="backgroundBlur"></div>
     <div class="title-bar">
-        <a class="back-icon" href="{% url 'home' %}"><i class="fas fa-arrow-left"></i> Home</a>
+        
         <img src="{% static 'images/logo.jpg' %}" alt="Logo">
        
-        <h1>Customer Portal</h1> 
+        <h1>Mechanic Portal</h1> 
         <div> 
             <a class="delete-account" href="{% url 'delete_account' %}">Delete Account</a>
 
@@ -293,67 +279,6 @@
         <div class="box" id="box3">Log Out</div>
        
     </div>
-    <div class="overlay" id="overlay"></div>
-
-    <div class="login-form" id="loginForm">
-        <button class="close-btn" id="closeLoginBtn">&times;</button>
-        <h2>Login</h2>
-        <form>
-            <input type="text" placeholder="Username" required>
-            <input type="password" placeholder="Password" required>
-            <a href="#" class="forgot-password">Forgot Password?</a>
-            <button class="logsub" type="submit">Login</button>
-        </form>
-    </div>
-
-    <div class="signup-form" id="signupForm">
-        <button class="close-btn" id="closeSignupBtn">&times;</button>
-        <h2>Sign Up</h2>
-        <form>
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="text" name="first_name" placeholder="First Name" required>
-            <input type="text" name="last_name" placeholder="Last Name">
-            <textarea name="address" placeholder="Address"></textarea>
-            <input type="email" name="email" placeholder="Email" required>
-            <select name="gender" required>
-                <option value="M">Male</option>
-                <option value="F">Female</option>
-            </select>
-            <input type="text" name="contact_number" placeholder="Contact Number" required>
-            <input type="file" name="profile_image">
-            <button class="signbtn" type="submit">Sign Up</button>
-        </form>
-    </div>
-    <script>
-        // JavaScript to handle box click and show the login form
-        document.getElementById('box1').addEventListener('click', function() {
-            document.getElementById('loginForm').style.display = 'block';
-            document.getElementById('overlay').style.display = 'block';
-            document.getElementById('background').style.filter = 'blur(10px)';
-        });
-        document.getElementById('box2').addEventListener('click', function() {
-            document.getElementById('signupForm').style.display = 'block';
-            document.getElementById('overlay').style.display = 'block';
-            document.getElementById('backgroundBlur').style.display = 'blur(10px)';
-        });
-        document.getElementById('closeLoginBtn').addEventListener('click', function() {
-            document.getElementById('loginForm').style.display = 'none';
-            document.getElementById('overlay').style.display = 'none';
-            document.getElementById('backgroundBlur').style.display = 'none';
-        });
-
-        document.getElementById('closeSignupBtn').addEventListener('click', function() {
-            document.getElementById('signupForm').style.display = 'none';
-            document.getElementById('overlay').style.display = 'none';
-            document.getElementById('backgroundBlur').style.display = 'none';
-        });
-
-        document.getElementById('box3').addEventListener('click', function() {
-            window.location.href = '{% url "logout" %}'
-        });
-        
-       
-    </script>
    
 </body>
 </html>

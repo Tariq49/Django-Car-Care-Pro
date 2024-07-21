@@ -108,6 +108,11 @@
         .footer-content a:hover {
             text-decoration: underline;
         }
+        .admin{
+            margin-left:1000px;
+            margin-top:40px;
+            font-weight:bold;
+        }
        
     </style>
 </head>
@@ -120,10 +125,11 @@
                 <div class="welcome-heading">
                     <h1>Welcome to Car Care Pro</h1>
                 </div>   
-                
+                <a class="admin" href="{% url 'admin:login' %}?next=/admin/">Admin</a>
             </div>
          
             <div class="button-container">
+
                 <button class="customer" onclick="showCustomerHomePage()">Customer</button>
 
                 <script>
@@ -131,7 +137,14 @@
                         window.location.href = "{% url 'customer_home' %}";
                     }
                 </script>
-                <button class="mech" onclick="showContent('mechanic')">Mechanic</button>
+
+                <button class="mech" onclick="showMechanicHomePage()">Mechanic</button>
+
+                <script>
+                    function showMechanicHomePage() {
+                        window.location.href = "{% url 'mechanic_home' %}";
+                    }
+                </script>
             </div>
         </div>
         

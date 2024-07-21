@@ -19,6 +19,7 @@ CUSTOM_APPS = [
     # USER DEFINED APPS
     "apps.accounts",
     "apps.Customer",
+    "apps.Mechanic",
 
 ]
 
