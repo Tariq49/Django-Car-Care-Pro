@@ -256,6 +256,15 @@
             font-weight:bold;
             color:white;
         }
+        .back-icon{
+            position: absolute;
+            margin-top:0px;
+            margin-left:1700px;
+            font-weight: bold;
+            font-size:16px;
+            color:white;
+           
+        }
         
     </style>
     
@@ -263,7 +272,7 @@
 <body>
     
     <div class="title-bar">
-        
+        <a class="back-icon" href="{% url 'home' %}"><i class="fas fa-arrow-left"></i> Home</a>
         <img src="{% static 'images/logo.jpg' %}" alt="Logo">
        
         <h1>Mechanic Portal</h1> 
