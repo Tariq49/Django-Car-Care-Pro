@@ -1,3 +1,20 @@
+![Description](https://github.com/Ginu5952/Django-Car-Care-Pro/blob/4676c3a6813601c1d94fac305df1362b14ccc5c8/images.jpeg?raw=true)
+
+<h1 align="center">Car Care Pro </h1>
+<h2 align="center">A Premium Detailing Hub... </h2>
+<p align="center">
+
+## Technologies Used
+![HTML5](https://img.shields.io/badge/-HTML5-white?color=ff6529&style=for-the-badge&logo=HTML5&logoColor=white&logoWidth=20)
+![CSS3](https://img.shields.io/badge/-CSS3-orange?color=264DE4&style=for-the-badge&logo=CSS3&logoColor=white&logoWidth=20)
+![Javascript](https://img.shields.io/badge/-javascript-white?style=for-the-badge&logo=javascript&logoColor=white&logoWidth=20&color=F1DB4E)
+![Django](https://img.shields.io/badge/-Django-white?style=for-the-badge&logo=django&logoColor=white&logoWidth=20&color=092E20)
+![Python](https://img.shields.io/badge/-Python-white?style=for-the-badge&logo=python&logoColor=white&logoWidth=20&color=3776AB)
+![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-white?style=for-the-badge&logo=postgresql&logoColor=white&logoWidth=20&color=4169E1)
+
+
+
+
 # Mission Statement
 
 "To facilitate seamless vehicle servicing experiences, our Django-powered platform connects customers and mechanics, ensuring efficient service management and transparency throughout the repair process."
