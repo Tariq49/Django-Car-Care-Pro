@@ -288,7 +288,63 @@
         <div class="box" id="box3">Log Out</div>
        
     </div>
-   
+    <div class="login-form" id="loginForm">
+        <button class="close-btn" id="closeLoginBtn">&times;</button>
+        <h2>Login</h2>
+        <form>
+            <input type="text" placeholder="Username" required>
+            <input type="password" placeholder="Password" required>
+            <a href="#" class="forgot-password">Forgot Password?</a>
+            <button class="logsub" type="submit">Login</button>
+        </form>
+    </div>
+
+    <div class="signup-form" id="signupForm">
+        <button class="close-btn" id="closeSignupBtn">&times;</button>
+        <h2>Sign Up</h2>
+        <form>
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="text" name="first_name" placeholder="First Name" required>
+            <input type="text" name="last_name" placeholder="Last Name">
+            <textarea name="address" placeholder="Address"></textarea>
+            <input type="email" name="email" placeholder="Email" required>
+            <select name="gender" required>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+            </select>
+            <input type="text" name="contact_number" placeholder="Contact Number" required>
+            <input type="file" name="profile_image">
+            <button class="signbtn" type="submit">Sign Up</button>
+        </form>
+    </div>
+    <script>
+        // JavaScript to handle box click and show the login form
+        document.getElementById('box1').addEventListener('click', function() {
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('background').style.filter = 'blur(10px)';
+        });
+        document.getElementById('box2').addEventListener('click', function() {
+            document.getElementById('signupForm').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('backgroundBlur').style.display = 'blur(10px)';
+        });
+        document.getElementById('closeLoginBtn').addEventListener('click', function() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('backgroundBlur').style.display = 'none';
+        });
+
+        document.getElementById('closeSignupBtn').addEventListener('click', function() {
+            document.getElementById('signupForm').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('backgroundBlur').style.display = 'none';
+        });
+
+        document.getElementById('box3').addEventListener('click', function() {
+            window.location.href = '{% url "logout" %}'
+        });
+        </scirpt>
 </body>
 </html>
 
