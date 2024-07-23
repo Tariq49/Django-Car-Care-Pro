@@ -16,13 +16,17 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
+from apps.accounts import views 
 
 admin.site.site_header = "CAR CARE PRO"
 admin.site.index_title = "Car Service Management"
 admin.site.site_title = "WELCOME TO HOME"
 
 urlpatterns = [
-   
     path("admin/", admin.site.urls),
+    path('', include('apps.accounts.urls')), 
+    path('', include('apps.Customer.urls')), 
+    path('', include('apps.Mechanic.urls')), 
+  
 ]

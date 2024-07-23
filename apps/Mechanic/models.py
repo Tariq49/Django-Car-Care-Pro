@@ -21,5 +21,8 @@ class Mechanic(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.username})"
 
+
     class Meta:
         verbose_name_plural = 'Mechanic Profile'
+
+

@@ -1,3 +1,20 @@
+![Description](https://github.com/Ginu5952/Django-Car-Care-Pro/blob/4676c3a6813601c1d94fac305df1362b14ccc5c8/images.jpeg?raw=true)
+
+<h1 align="center">Car Care Pro </h1>
+<h2 align="center">A Premium Detailing Hub... </h2>
+<p align="center">
+
+## Technologies Used
+![HTML5](https://img.shields.io/badge/-HTML5-white?color=ff6529&style=for-the-badge&logo=HTML5&logoColor=white&logoWidth=20)
+![CSS3](https://img.shields.io/badge/-CSS3-orange?color=264DE4&style=for-the-badge&logo=CSS3&logoColor=white&logoWidth=20)
+![Javascript](https://img.shields.io/badge/-javascript-white?style=for-the-badge&logo=javascript&logoColor=white&logoWidth=20&color=F1DB4E)
+![Django](https://img.shields.io/badge/-Django-white?style=for-the-badge&logo=django&logoColor=white&logoWidth=20&color=092E20)
+![Python](https://img.shields.io/badge/-Python-white?style=for-the-badge&logo=python&logoColor=white&logoWidth=20&color=3776AB)
+![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-white?style=for-the-badge&logo=postgresql&logoColor=white&logoWidth=20&color=4169E1)
+
+
+
+
 # Mission Statement
 
 "To facilitate seamless vehicle servicing experiences, our Django-powered platform connects customers and mechanics, ensuring efficient service management and transparency throughout the repair process."
@@ -6,7 +23,6 @@
 
 - Develop a technician approval process based on skill assessments and mechanic requests.
 - Develop a user-friendly interface for customers to easily register, log in, and request vehicle servicing.
-- Develop a technician approval process based on skill assessments and mechanic requests.
 - Establish a feedback system for customers to provide reviews and suggestions regarding service quality.
 - Enable customers to view and manage invoices and track the progress of their vehicle repairs.
 
@@ -59,50 +75,3 @@ Quit the server with CONTROL-C.
 #### Additional Notes
 - To stop the development server, press CONTROL-C in the terminal where it is running.
 
-#### Django Development Commands
-The command is used to create a new superuser for your Django project with a specified settings module.
-
-```
-make dev-super
-```
-
-When you create a new database for your Django project, running this command is an essential step to set up the database schema according to your models and their migrations.
-
-```
-make dev-m
-```
-
-This command will scan the models.py file for changes, create a new migration file in the migrations directory of the app, and ensure that it uses the settings specified in config/settings/dev.py.
-
-```
-make dev-makem
-```
-
-Django uses migrations to track changes to your models over time. Running migrate applies these changes to your database schema, ensuring it stays synchronized with your model definitions.
-
-```
-make dev-m
-```
-
-The command is used to display a list of all the migrations in your Django project and their current status, using a specific settings module.
-
-```
-make dev-showm
-```
-
-The command is used to open a database shell for your Django project's database, using a specific settings module.
-```
-make dev-dbshell
-```
-
-The command is used to open an interactive Python shell with your Django project's context, using a specific settings module.
-
-```
-make dev-shell
-```
-
-The command is used to display the SQL statements for a specific migration in your Django project
-
-```
-make dev-sqlm
-```

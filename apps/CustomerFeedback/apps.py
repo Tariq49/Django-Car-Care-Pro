@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class MechanicConfig(AppConfig):
+class CustomerfeedbackConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "apps.Mechanic"
+    name = "CustomerFeedback"

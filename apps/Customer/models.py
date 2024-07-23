@@ -6,8 +6,8 @@ class Customer(AbstractUser):
     
     username = models.CharField(max_length=15, unique=True)
     first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    address = models.TextField()
+    last_name = models.CharField(max_length=30,null=True,blank=True)
+    address = models.TextField(null=True,blank=True)
     email = models.EmailField(unique=True,null=True,blank=True)
     gender = models.CharField(max_length=1, choices=[('M', 'Male'), ('F', 'Female')])
     contact_number = models.CharField(max_length=15,validators=[RegexValidator(regex=r'^\d{9}$', message="Contact number should be 9 digits.")])

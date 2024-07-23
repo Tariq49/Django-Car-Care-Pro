@@ -9,9 +9,8 @@ from django.db import models
 # vehicle_brand
 # problem_description
 # date
-# cost
+# cost foriegkey ServiceCostDetail
 
 #customer=models.ForeignKey('Customer', on_delete=models.CASCADE,null=True)
 #mechanic=models.ForeignKey('Mechanic',on_delete=models.CASCADE,null=True)
 
-#status (pending, approved, repairing, repairing done, released)
