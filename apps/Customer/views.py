@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Customer
 from django.contrib.auth import get_user_model
-from django.contrib.auth import login
+from django.contrib.auth import login,logout
 from django.utils import timezone
 from django.db import IntegrityError
 
@@ -43,8 +43,9 @@ def SignUpView(request):
             return render(request, 'customer_home.html', {'error': 'Invalid gender value. Choose "M" for Male or "F" for Female.'})
 
         if not contact_number.isdigit() or len(contact_number) != 9:
+            messages.error(request, 'Contact number should be 9 digits')
            
-            return render(request, 'customer_home.html', {'error': 'Contact number should be 9 digits.'})
+            return redirect("customer_home")
         
         try:
             # Create a new customer instance
@@ -66,14 +67,15 @@ def SignUpView(request):
 
             # Log the user in
             login(request, customer)
+            logout(request)
             messages.success(request, 'Sign up successful!')
             return redirect('home')
         
         except IntegrityError as e:
             # Handle IntegrityError, e.g., if email or username already exists
             error_message = 'A user with this email or username already exists.'
-            messages.success(request, error_message)
-            return render(request, 'customer_home.html', {'error': error_message})
+            messages.error(request, error_message)
+            return redirect("customer_home")
 
     
     return render(request, 'customer_home.html')     

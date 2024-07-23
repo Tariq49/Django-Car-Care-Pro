@@ -172,6 +172,18 @@
     </style>
 </head>
 <body>
+    
+    <div class="container mt-3">
+        {% if messages %}
+            <div class="alert-container">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>  
     <div class="background-container">
         <div class="header-content">
             <div class="header-items">

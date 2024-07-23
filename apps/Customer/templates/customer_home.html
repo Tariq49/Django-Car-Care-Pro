@@ -287,7 +287,7 @@
     
 </head>
 <body>
-    
+         
     <div class="background-blur" id="backgroundBlur"></div>
     <div class="title-bar">
         <a class="back-icon" href="{% url 'home' %}"><i class="fas fa-arrow-left"></i> Home</a>
@@ -301,6 +301,7 @@
     </div>
     
     <div class="main-content">
+        
         <div class="box" id="box1">Login</div>
         <div class="box" id="box2">Sign Up</div>
         <div class="box" id="box3">Log Out</div>
@@ -341,6 +342,8 @@
             <button class="signbtn" type="submit">Sign Up</button>
         </form>
     </div>
+     
+    
     <script>
         // JavaScript to handle box click and show the login form
         document.getElementById('box1').addEventListener('click', function() {
@@ -368,8 +371,7 @@
         document.getElementById('box3').addEventListener('click', function() {
             window.location.href = '{% url "logout" %}'
         });
-        
-       
+
     </script>
    
 </body>
