@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swiper Autoplay Example</title>
-   
+    <title>Car Care Pro</title>
+    {% load static %}
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
         .welcome-heading {
-            font-size: 1.2em; 
+            font-size: 12px; 
             font-weight: bold;
             margin: 0;
             padding: 0;
             align:center;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9); 
+            margin-top:5px;
         }
         .swiper-container {
            
             width: 100%;
-            height: calc(100vh - 120px); 
+            height: calc(100vh - 80px); 
             position: relative;
         }
         .swiper-slide {
@@ -38,46 +40,50 @@
         }
         .button-container {
             position: absolute;
-            top: 40px; 
-            right: 20px; 
-           
+            top: 15px; 
+            display:flex;
+            width:100px;
+            height:50px;
+            margin-left:1200px;
+            align-items:center;
         }
         .button-container button {
             
             background-color: #EAF19C; 
             border: none;
             color: black;
-            padding: 10px 30px; 
+            padding: 10px 20px; 
             text-align: center;
             text-decoration: none;
+            margin: 4px 10px;
+            font-size: 14px; 
             display: inline-block;
-            font-size: 16px; 
-            margin: 4px 2px;
             cursor: pointer;
             border-radius: 5px; 
             transition: background-color 0.3s, transform 0.2s;
+           
+            width:auto;
+            align-items:center;
         }
         .customer:hover, .mech:hover{
             color:white;
         }
         .background-container{
+           
             background:beige;
             position: relative; 
             overflow: hidden; 
             padding: 0px;
+            height:2%;
         }
-        .sub-heading {
-            color:Green;
-            margin-left:30px;
-            font-weight : Semi;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
-        }
+       
         .header-content {
             display: flex;
             align-items: center;
             justify-content: space-between; 
-            margin-bottom: 20px; 
+            margin-bottom: 10px; 
             padding: 0 20px; 
+           
           
         }
         .header-items {
@@ -96,7 +102,9 @@
             z-index: 1; 
             display: flex;
             justify-content: center; 
-            gap: 200px; 
+            gap: 100px; 
+            height:1%;
+            margin-bottom:6px;
         }
         .footer-content p {
             margin: 20px 0;
@@ -109,8 +117,8 @@
             text-decoration: underline;
         }
         .admin{
-            margin-left:1000px;
-            margin-top:40px;
+            margin-left:700px;
+            margin-top:20px;
             font-weight:bold;
             color:black;
         }
@@ -118,14 +126,55 @@
             color:yellow;
         }
        
+        .modal-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background-color: white;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 60%;
+            height:70%;
+        }
+        #map {
+            width: 100%;
+            height: 500px;
+        }
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        #mapModal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
     </style>
 </head>
 <body>
-    {% load static %}
     <div class="background-container">
         <div class="header-content">
             <div class="header-items">
-
                 <div class="welcome-heading">
                     <h1>Welcome to Car Care Pro</h1>
                 </div>   
@@ -133,9 +182,7 @@
             </div>
          
             <div class="button-container">
-
                 <button class="customer" onclick="showCustomerHomePage()">Customer</button>
-
                 <script>
                     function showCustomerHomePage() {
                         window.location.href = "{% url 'customer_home' %}";
@@ -143,7 +190,6 @@
                 </script>
 
                 <button class="mech" onclick="showMechanicHomePage()">Mechanic</button>
-
                 <script>
                     function showMechanicHomePage() {
                         window.location.href = "{% url 'mechanic_home' %}";
@@ -151,7 +197,6 @@
                 </script>
             </div>
         </div>
-        
         
         <!-- Swiper -->
         <div class="swiper-container">
@@ -169,32 +214,35 @@
                     <img src="{% static 'images/car4.jpg' %}" alt="Image 4">
                 </div>
             </div>
-           
-            
-            <div class="footer-content">
-               
-                <a href="https://www.facebook.com/carcareprobbsr/" title="Visit our website"><i class="fas fa-globe"></i> www.carcarepro.org</a>
-                <a href="mailto:carcarepro@gmail.com" title="Send us an email"><i class="fas fa-envelope"></i> carcarepro@gmail.com</a>
-                <a href="tel:+4915734001700" title="Call us"><i class="fas fa-phone"></i> +49 1573 4001700</a>
-                <a href="#" title="Our Address"><i class="fas fa-map-marker-alt"></i> 123 Car Care St, Auto City, AC 45678</a>
-                <a href="{% url 'about_us' %}" title="About Us"><i class="fas fa-info-circle"></i> About Us</a>
-
-               
-            </div>
-            <div class="swiper-pagination"></div>
-        
         </div>
-    </div>   
-    
+
+        <div class="footer-content">
+            <a href="https://www.facebook.com/carcareprobbsr/" title="Visit our website"><i class="fas fa-globe"></i> www.carcarepro.org</a>
+            <a href="mailto:carcarepro@gmail.com" title="Send us an email"><i class="fas fa-envelope"></i> carcarepro@gmail.com</a>
+            <a href="tel:+4915734001700" title="Call us"><i class="fas fa-phone"></i> +49 1573 4001700</a>
+            <a href="#" id="map-link" title="Our Address"><i class="fas fa-map-marker-alt"></i> Schmalenbecker strasse 16,Hamburg,22803</a>
+            <a href="{% url 'about_us' %}" title="About Us"><i class="fas fa-info-circle"></i> About Us</a>
+        </div>
+    </div>
+
+    <!-- Modal for Map -->
+    <div id="mapModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="map"></div>
+        </div>
+    </div>
+
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     
     <script>
         var swiper = new Swiper('.swiper-container', {
             direction: 'horizontal',
             loop: true,
             autoplay: {
-                delay: 3000, 
-                disableOnInteraction: false, 
+                delay: 3000,
+                disableOnInteraction: false,
             },
             pagination: {
                 el: '.swiper-pagination',
@@ -205,6 +253,42 @@
                 prevEl: '.swiper-button-prev',
             },
         });
+
+         // Initialize Leaflet map
+         function initMap() {
+            
+            var addressCoords = [53.551086, 9.993682]; 
+
+            var map = L.map('map').setView(addressCoords, 13);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            L.marker(addressCoords).addTo(map)
+                .bindPopup('Schmalenbecker straße 16, Hamburg, 22803')
+                .openPopup();
+        }
+
+        // Map Modal functionality
+        var mapModal = document.getElementById('mapModal');
+        var mapLink = document.getElementById('map-link');
+        var closeMap = document.getElementsByClassName('close')[0];
+
+        mapLink.onclick = function() {
+            mapModal.style.display = 'block';
+            setTimeout(initMap, 200); // Initialize the map when the modal is shown
+        }
+
+        closeMap.onclick = function() {
+            mapModal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == mapModal) {
+                mapModal.style.display = 'none';
+            }
+        }
     </script>
 </body>
 </html>
