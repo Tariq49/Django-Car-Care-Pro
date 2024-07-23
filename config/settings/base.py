@@ -20,6 +20,7 @@ CUSTOM_APPS = [
     "apps.accounts",
     "apps.Customer",
     "apps.Mechanic",
+    "apps.MechanicAttendance",
 
 ]
 

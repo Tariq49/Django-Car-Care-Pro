@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class MechanicattendanceConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "MechanicAttendance"
+    name = "apps.MechanicAttendance"
