@@ -21,6 +21,7 @@ CUSTOM_APPS = [
     "apps.Customer",
     "apps.Mechanic",
     "apps.MechanicAttendance",
+    "apps.MechanicWorkStatus",
 
 ]
 
