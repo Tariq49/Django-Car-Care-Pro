@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Customer Home</title>
+    <title>Mechanic Home</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/bubbles.css' %}">
     <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
     <script src="{% static 'js/bubbles.js' %}"></script>
@@ -39,8 +39,8 @@
             left: 20px; 
         }
         .title-bar img {
-            height: 60px; 
-            width: 60px; 
+            height: 40px; 
+            width: 40px; 
             border-radius: 50%; 
             object-fit: cover; 
         }
@@ -78,6 +78,7 @@
 
         .box:hover{
             color:black;
+            cursor:pointer;
         }
 
         .box#box1 {
@@ -271,6 +272,7 @@
 </head>
 <body>
     
+    <div class="background-blur" id="backgroundBlur"></div>
     <div class="title-bar">
         <a class="back-icon" href="{% url 'home' %}"><i class="fas fa-arrow-left"></i> Home</a>
         <img src="{% static 'images/logo.jpg' %}" alt="Logo">
@@ -288,6 +290,8 @@
         <div class="box" id="box3">Log Out</div>
        
     </div>
+    
+    <div class="overlay" id="overlay"></div>
     <div class="login-form" id="loginForm">
         <button class="close-btn" id="closeLoginBtn">&times;</button>
         <h2>Login</h2>
