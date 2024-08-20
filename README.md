@@ -17,14 +17,20 @@
 
 # Mission Statement
 
-"To facilitate seamless vehicle servicing experiences, our Django-powered platform connects customers and mechanics, ensuring efficient service management and transparency throughout the repair process."
+"To provide a seamless platform where customers can easily manage their vehicle service."
 
 # Mission Objectives
 
-- Develop a technician approval process based on skill assessments and mechanic requests.
-- Develop a user-friendly interface for customers to easily register, log in, and request vehicle servicing.
-- Establish a feedback system for customers to provide reviews and suggestions regarding service quality.
-- Enable customers to view and manage invoices and track the progress of their vehicle repairs.
+- Enable customers to easily submit, track and manage their vehicle service requests online.
+- Enable customers to  receive services from qualified and experienced professionals. 
+- Provide customers with real-time repair status notifications.
+- Implement a RESTful API for flexible system integration.
+- Ensure the customer’s vehicle is up-to-date with the latest service and repair records.
+- Collect and address customer feedback promptly.
+- Implement session expiration and automatic logout features to enhance security.
+- Develop a system to confirm that all service bills have been paid by customers and update payment records as necessary.
+- Offer detailed breakdowns of service costs for customer transparency and financial management.
+
 
 
 # Instructions to run pogram
