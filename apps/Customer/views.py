@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Customer
 from django.contrib.auth import get_user_model
-from django.contrib.auth import login,logout
+from django.contrib.auth import login,logout,authenticate
 from django.utils import timezone
 from django.db import IntegrityError
 
@@ -79,3 +79,22 @@ def SignUpView(request):
 
     
     return render(request, 'customer_home.html')     
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        # Authenticate user
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            # Log the user in
+            login(request, user)
+            messages.success(request, 'Login successful!')
+            return redirect('home')  # Redirect to home or any other page
+        else:
+            messages.error(request, 'Invalid username or password.')
+            return render(request, 'customer_home.html')
+
+    return render(request, 'customer_home.html')

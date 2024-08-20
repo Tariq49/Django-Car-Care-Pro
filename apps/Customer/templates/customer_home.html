@@ -282,6 +282,11 @@
             color:white;
            
         }
+        .alert {
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
       
     </style>
     
@@ -298,6 +303,9 @@
             <a class="delete-account" href="{% url 'delete_account' %}">Delete Account</a>
 
         </div>    
+
+        
+
     </div>
     
     <div class="main-content">
@@ -342,7 +350,6 @@
             <button class="signbtn" type="submit">Sign Up</button>
         </form>
     </div>
-     
     
     <script>
         // JavaScript to handle box click and show the login form
@@ -371,6 +378,7 @@
         document.getElementById('box3').addEventListener('click', function() {
             window.location.href = '{% url "logout" %}'
         });
+
 
     </script>
    
