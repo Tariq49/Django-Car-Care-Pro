@@ -1,4 +1,6 @@
 {% load static %} 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -196,6 +198,7 @@
 
         .logsub:hover{
             color:green;
+            cursor:pointer;
             
         }
 
@@ -210,6 +213,9 @@
             color:white;
             font-size: 12px; 
             font-weight:bold;
+        }
+        .signbtn:hover{
+            cursor:pointer;
         }
         .close-btn
         {
@@ -276,11 +282,12 @@
             color:white;
            
         }
+      
     </style>
     
 </head>
 <body>
-    
+         
     <div class="background-blur" id="backgroundBlur"></div>
     <div class="title-bar">
         <a class="back-icon" href="{% url 'home' %}"><i class="fas fa-arrow-left"></i> Home</a>
@@ -294,6 +301,7 @@
     </div>
     
     <div class="main-content">
+        
         <div class="box" id="box1">Login</div>
         <div class="box" id="box2">Sign Up</div>
         <div class="box" id="box3">Log Out</div>
@@ -305,6 +313,7 @@
         <button class="close-btn" id="closeLoginBtn">&times;</button>
         <h2>Login</h2>
         <form>
+           
             <input type="text" placeholder="Username" required>
             <input type="password" placeholder="Password" required>
             <a href="#" class="forgot-password">Forgot Password?</a>
@@ -315,8 +324,11 @@
     <div class="signup-form" id="signupForm">
         <button class="close-btn" id="closeSignupBtn">&times;</button>
         <h2>Sign Up</h2>
-        <form>
+
+        <form method="POST" action="{% url 'signup' %}" enctype="multipart/form-data">
+            {% csrf_token %}
             <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
             <input type="text" name="first_name" placeholder="First Name" required>
             <input type="text" name="last_name" placeholder="Last Name">
             <textarea name="address" placeholder="Address"></textarea>
@@ -330,6 +342,8 @@
             <button class="signbtn" type="submit">Sign Up</button>
         </form>
     </div>
+     
+    
     <script>
         // JavaScript to handle box click and show the login form
         document.getElementById('box1').addEventListener('click', function() {
@@ -357,8 +371,7 @@
         document.getElementById('box3').addEventListener('click', function() {
             window.location.href = '{% url "logout" %}'
         });
-        
-       
+
     </script>
    
 </body>

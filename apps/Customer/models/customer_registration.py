@@ -16,3 +16,24 @@ class Customer(AbstractUser):
 
     class Meta:
         verbose_name_plural = 'Customer Profile'
+
+        constraints = [
+            
+            models.UniqueConstraint(fields=['email'], name='unique_email'),
+
+           
+            models.UniqueConstraint(fields=['contact_number'], name='unique_contact_number'),
+
+            
+            models.UniqueConstraint(fields=['username', 'email'], name='unique_username_email'),
+            
+           
+          
+
+            models.UniqueConstraint(fields=['username', 'first_name', 'last_name'], name='unique_username_firstname_lastname')
+        ]
+
+        indexes = [
+            models.Index(fields=['username']),
+            models.Index(fields=['email']),
+        ]
