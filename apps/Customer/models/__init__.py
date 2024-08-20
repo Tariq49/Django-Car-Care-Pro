@@ -1,0 +1,1 @@
+from .customer_registration import Customer

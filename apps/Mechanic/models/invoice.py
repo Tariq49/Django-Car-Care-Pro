@@ -1,5 +1,3 @@
-from django.db import models
-
 # Create your models here.
 
 #service_request_id: Foreign key referencing CustomerServiceRequest

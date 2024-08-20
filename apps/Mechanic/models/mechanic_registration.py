@@ -24,5 +24,3 @@ class Mechanic(models.Model):
 
     class Meta:
         verbose_name_plural = 'Mechanic Profile'
-
-

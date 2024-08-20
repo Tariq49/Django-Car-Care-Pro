@@ -20,14 +20,12 @@ CUSTOM_APPS = [
     "apps.accounts",
     "apps.Customer",
     "apps.Mechanic",
-    "apps.MechanicAttendance",
-    "apps.MechanicWorkStatus",
-
+    
 ]
 
 
 THIRD_PARTY_APPS = [
-    # third party library
+    'rest_framework',  # third party library
     
 ]        
 
