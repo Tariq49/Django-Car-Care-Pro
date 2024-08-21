@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models.customer_service_request import Vehicle, ServiceRequest
 from .models.customer import Customer
+from .models.customer_feeback import CustomerFeedback
 
 class VehicleInline(admin.TabularInline): 
     model = Vehicle
@@ -30,6 +31,36 @@ class ServiceRequestAdmin(admin.ModelAdmin):
         vehicles = obj.vehicles.all()
         return ", ".join([f"{v.vehicle_name} {v.vehicle_model} ({v.vehicle_no})" for v in vehicles])
 
+class CustomerFeedbackAdmin(admin.ModelAdmin):
+    list_display = (
+        'get_customer_name', 
+        'service_name', 
+        'problem_description', 
+        'rating', 
+        'comments'
+    )
+
+    def get_customer_name(self, obj):
+        return obj.service_id.customer.user.get_full_name() if obj.service_id.customer.user else "Unknown Customer"
+    get_customer_name.short_description = 'Customer Name'
+
+    def service_name(self, obj):
+        return obj.service_id.service_name
+    service_name.short_description = 'Service Name'
+
+    def problem_description(self, obj):
+        return obj.service_id.problem_description
+    problem_description.short_description = 'Problem Description'
+
+    def rating(self, obj):
+        return obj.rating
+    rating.short_description = 'Rating'
+
+    def comments(self, obj):
+        return obj.comments or "No comments provided"
+    comments.short_description = 'Comments'
+
 admin.site.register(ServiceRequest, ServiceRequestAdmin)
 admin.site.register(Customer,CustomerAdmin)
+admin.site.register(CustomerFeedback,CustomerFeedbackAdmin)
 

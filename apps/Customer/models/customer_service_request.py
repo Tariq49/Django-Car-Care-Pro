@@ -32,8 +32,11 @@ class ServiceRequest(models.Model):
 
    
     def __str__(self):
-        return f'Service Request  {self.customer.user.username}'
-
+        mechanic_name = f"Mechanic: {self.mechanic.user.get_full_name()}" if self.mechanic else "No Mechanic Assigned"
+        return (f'Service Request: {self.customer.user.username} | '
+                f'Service Name: {self.service_name} | '
+                f'Problem Description: {self.problem_description} | '
+                f'{mechanic_name}')
     
     def save(self, *args, **kwargs):
         # Automatically set the completed date when the status is set to 'Completed'
