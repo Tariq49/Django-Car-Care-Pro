@@ -3,7 +3,7 @@ from django.core.validators import RegexValidator, MinValueValidator
 from django.utils import timezone
 
 class Specialization(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100,unique=True)
 
     def __str__(self):
         return self.name
@@ -23,10 +23,13 @@ class Mechanic(models.Model):
 
     
 
+    def get_specializations(self):
+        return ", ".join([s.name for s in self.specializations.all()])
+
     def __str__(self):
-       
         full_name = f"{self.user.first_name} {self.user.last_name}"
-        return f"{full_name} ({self.years_of_experience})"
+        specializations = self.get_specializations()
+        return f"{full_name} - {self.years_of_experience} years experience, Specializations: {specializations}"
 
 
     class Meta:

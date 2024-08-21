@@ -5,12 +5,17 @@ from apps.Mechanic.models import Mechanic,Specialization
 
 
 class MechanicDetails(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'years_of_experience', 'get_specializations')
+    list_display = ('get_mechanic_name', 'years_of_experience','get_specializations')
+
+    def get_mechanic_name(self, obj):
+        return f"{obj.user.first_name} {obj.user.last_name}"
+
+    get_mechanic_name.short_description = 'Mechanic Name'
 
     def get_specializations(self, obj):
-        # obj refers to the instance of Mechanic
-        return ", ".join(s.name for s in obj.specializations.all())
-    get_specializations.short_description = 'Specializations'  # This sets the column header
+        return ", ".join([specialization.name for specialization in obj.specializations.all()])
 
+    get_specializations.short_description = 'Specializations'
+   
 admin.site.register(Specialization) 
-admin.site.register(Mechanic)
+admin.site.register(Mechanic,MechanicDetails)
