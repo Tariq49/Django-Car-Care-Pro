@@ -14,12 +14,12 @@ DEFAULT_APPS = [
 ]    
 
 
-CUSTOM_APPS = [
+CREATED_APP = [
 
     # USER DEFINED APPS
-    "apps.accounts",
-    "apps.Customer",
-    "apps.Mechanic",
+    "apps.core.apps.CoreConfig",
+    "apps.Customer.apps.CustomerConfig",
+    "apps.Mechanic.apps.MechanicConfig",
     
 ]
 
@@ -29,7 +29,7 @@ THIRD_PARTY_APPS = [
     
 ]        
 
-INSTALLED_APPS = [*DEFAULT_APPS, *CUSTOM_APPS, *THIRD_PARTY_APPS]
+INSTALLED_APPS = [*DEFAULT_APPS, *CREATED_APP, *THIRD_PARTY_APPS]
 
 
 MIDDLEWARE = [
@@ -47,7 +47,7 @@ ROOT_URLCONF = "config.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [ BASE_DIR / 'templates'],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -105,5 +105,4 @@ LOGOUT_REDIRECT_URL = '/'
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-AUTH_USER_MODEL = 'Customer.Customer'
 

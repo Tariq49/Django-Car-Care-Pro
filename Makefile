@@ -24,3 +24,12 @@ dev-shell:
 
 dev-super:
 	python3 manage.py createsuperuser --settings=config.settings.dev
+
+dev-shell-plus:
+	python3 manage.py shell_plus --settings=config.settings.dev
+
+dev-test:
+	python3 manage.py test --settings=config.settings.dev
+
+dev-startapp:
+	cd apps && python3 ../manage.py startapp $(app) --settings=config.settings.dev		
