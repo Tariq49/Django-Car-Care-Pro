@@ -13,4 +13,4 @@ class MechanicDetails(admin.ModelAdmin):
     get_specializations.short_description = 'Specializations'  # This sets the column header
 
 admin.site.register(Specialization) 
-admin.site.register(Mechanic, MechanicDetails)
+admin.site.register(Mechanic)
