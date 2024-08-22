@@ -13,7 +13,7 @@ h1 {
     margin-top: 50px; /* Adjust as needed */
     text-align: center; /* Center text horizontally */
     font-size: 2.5em; /* Adjust font size as needed */
-    color: #3fd859; /* Optional: Text color */
+    color: white; /* Optional: Text color */
 
     
 }
@@ -25,7 +25,7 @@ h1 {
 }
 
 .module caption {
-    background: rgb(98, 207, 98);
+    background: rgb(69, 180, 69);
 }
 
 

@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import RegexValidator, MinValueValidator 
 from django.utils import timezone
+from multiselectfield import MultiSelectField
 
 class Specialization(models.Model):
     name = models.CharField(max_length=100,unique=True)
@@ -10,6 +11,17 @@ class Specialization(models.Model):
     
 
 class Mechanic(models.Model):
+
+    DAYS_OF_WEEK = [
+    ('Monday', 'Monday'),
+    ('Tuesday', 'Tuesday'),
+    ('Wednesday', 'Wednesday'),
+    ('Thursday', 'Thursday'),
+    ('Friday', 'Friday'),
+    ('Saturday', 'Saturday'),
+    ('Sunday', 'Sunday'),
+    ]
+
     
     user = models.OneToOneField("auth.User", on_delete=models.CASCADE, default=1)
     specializations =  models.ManyToManyField(Specialization,related_name='mechanics') 
@@ -19,7 +31,7 @@ class Mechanic(models.Model):
     gender = models.CharField(max_length=1, choices=[('M', 'Male'), ('F', 'Female')])
     contact_number = models.CharField(max_length=15,validators=[RegexValidator(regex=r'^\d{9}$', message="Contact number should be 9 digits.")])
     profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
-    work_days = models.CharField(max_length=50) 
+    work_days = MultiSelectField(choices=DAYS_OF_WEEK , null=True, blank=True, max_choices=7, max_length=50, help_text="Select multiple days using Ctrl or Cmd key")
     
 
     
