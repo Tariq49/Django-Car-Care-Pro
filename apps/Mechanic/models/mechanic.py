@@ -19,7 +19,8 @@ class Mechanic(models.Model):
     gender = models.CharField(max_length=1, choices=[('M', 'Male'), ('F', 'Female')])
     contact_number = models.CharField(max_length=15,validators=[RegexValidator(regex=r'^\d{9}$', message="Contact number should be 9 digits.")])
     profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
-
+    work_days = models.CharField(max_length=50) 
+    
 
     
 
@@ -31,3 +32,5 @@ class Mechanic(models.Model):
 
     class Meta:
         verbose_name_plural = 'Mechanic'
+
+
