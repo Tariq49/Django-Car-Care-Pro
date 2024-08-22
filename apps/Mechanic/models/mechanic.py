@@ -7,8 +7,8 @@ class Specialization(models.Model):
 
     def __str__(self):
         return self.name
+    
 
-# Create your models here.
 class Mechanic(models.Model):
     
     user = models.OneToOneField("auth.User", on_delete=models.CASCADE, default=1)
