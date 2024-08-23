@@ -2,7 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from apps.core.constants import SERVICE_NEEDED_CHOICES
-from apps.Mechanic.models.mechanic import Mechanic 
+from apps.Mechanic.models.price_per_service import MechanicPricePerService
 from django.utils import timezone
 
 
@@ -20,7 +20,7 @@ class ServiceRequest(models.Model):
     problem_description = models.TextField()
     date_of_request = models.DateTimeField(default=timezone.now)  
     service_name = models.CharField(max_length=50,choices=SERVICE_NEEDED_CHOICES)
-    mechanic = models.ForeignKey(Mechanic, on_delete=models.SET_NULL, null=True)
+    mechanic = models.ForeignKey(MechanicPricePerService, on_delete=models.SET_NULL, null=True)
     mechanic_update = models.TextField(blank=True, null=True)  # Mechanic's updates about the work
     status = models.CharField(max_length=20, default='Pending')  # e.g., Pending, In Progress, Completed
     completed_date = models.DateTimeField(blank=True, null=True)
@@ -32,8 +32,9 @@ class ServiceRequest(models.Model):
 
    
     def __str__(self):
-        mechanic_name = f"Mechanic: {self.mechanic.user.get_full_name()}" if self.mechanic else "No Mechanic Assigned"
-        return (f'Service Request: {self.customer.user.username} | '
+        customer_name = f"Customer: {self.customer.user.get_full_name()}"
+        mechanic_name = f"Mechanic: {self.mechanic.mechanic.user.get_full_name()}" if self.mechanic else "No Mechanic Assigned"
+        return (f'{customer_name} | '
                 f'Service Name: {self.service_name} | '
                 f'Problem Description: {self.problem_description} | '
                 f'{mechanic_name}')

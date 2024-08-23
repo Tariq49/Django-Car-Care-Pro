@@ -19,6 +19,9 @@ from django.contrib import admin
 from django.urls import path,include
 from apps.admin import views 
 
+admin.site.site_header = "CAR CARE PRO"
+admin.site.index_title = "A Premium Dealing Hub"
+admin.site.site_title = "WELCOME TO CAR CARE PRO"
 
 urlpatterns = [
     path("admin/", admin.site.urls),

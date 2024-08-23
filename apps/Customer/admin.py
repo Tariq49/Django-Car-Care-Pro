@@ -8,10 +8,20 @@ class VehicleInline(admin.TabularInline):
     extra = 1 
 
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ('full_name','address','contact_number')
+    list_display = ('full_name','username','address','contact_number','email','date_of_join')
 
     def full_name(self, obj):
         return f"{obj.user.first_name} {obj.user.last_name}"
+    
+    def email(self,obj):
+        return obj.user.email
+    
+    def date_of_join(self, obj):
+        return obj.user.date_joined
+    
+    def username(self, obj):
+        return obj.user.username
+    username.short_description = 'Username'
 
 class ServiceRequestAdmin(admin.ModelAdmin):
     inlines = [VehicleInline] 
@@ -23,7 +33,7 @@ class ServiceRequestAdmin(admin.ModelAdmin):
     
     def mechanic_assigned(self, obj):
         if obj.mechanic:
-            return f"{obj.mechanic.user.first_name} {obj.mechanic.user.last_name}"
+            return f"{obj.mechanic.mechanic.user.first_name} {obj.mechanic.mechanic.user.last_name}"
         return "No mechanic assigned"
     
     def vehicle_details(self, obj):
@@ -37,7 +47,8 @@ class CustomerFeedbackAdmin(admin.ModelAdmin):
         'service_name', 
         'problem_description', 
         'rating', 
-        'comments'
+        'comments',
+        'mechanic_name'
     )
 
     def get_customer_name(self, obj):
@@ -59,6 +70,14 @@ class CustomerFeedbackAdmin(admin.ModelAdmin):
     def comments(self, obj):
         return obj.comments or "No comments provided"
     comments.short_description = 'Comments'
+
+    def mechanic_name(self, obj):
+        # Access the related ServiceRequest and then the MechanicPricePerService
+        service_request = obj.service_id
+        if service_request.mechanic:
+            return service_request.mechanic.mechanic.user.get_full_name()
+        return "No Mechanic Assigned"
+    mechanic_name.short_description = 'Serviced By'
 
 admin.site.register(ServiceRequest, ServiceRequestAdmin)
 admin.site.register(Customer,CustomerAdmin)

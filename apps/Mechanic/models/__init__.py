@@ -1,1 +1,2 @@
 from .mechanic import Mechanic,Specialization
+from .price_per_service import MechanicPricePerService
