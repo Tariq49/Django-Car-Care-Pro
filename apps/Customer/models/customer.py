@@ -29,3 +29,6 @@ class Customer(models.Model):
        
         full_name = f'{self.user.first_name} {self.user.last_name}'
         return full_name.strip()  
+    
+
+    
