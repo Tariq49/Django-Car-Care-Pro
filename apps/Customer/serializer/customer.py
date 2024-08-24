@@ -2,7 +2,7 @@
 from rest_framework import serializers
 from django.core.validators import RegexValidator
 from apps.Customer.models import Customer
-from apps.Customer.serializer.user import UserSerializer
+from .user import UserSerializer
 
 class CustomerSerializer(serializers.ModelSerializer):
 
@@ -39,3 +39,6 @@ class CustomerSerializer(serializers.ModelSerializer):
         model = Customer
         fields = '__all__'
         read_only_fields = ['user']
+
+
+

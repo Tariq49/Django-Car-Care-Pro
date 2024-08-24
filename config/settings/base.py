@@ -21,6 +21,7 @@ CREATED_APP = [
     "apps.Customer.apps.CustomerConfig",
     "apps.Mechanic.apps.MechanicConfig",
     
+    
 ]
 
 
