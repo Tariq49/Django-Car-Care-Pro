@@ -17,6 +17,14 @@ urlpatterns = [
     path('service/requests/<int:id>/update/', views.update_service_request, name='update_service_request'),
     path('service/requests/<int:id>/delete/', views.delete_service_request, name='delete_service_request'),
 
+    path('feedbacks/', views.customer_feedback_list, name='customer-feedback-list'),
+    path('feedback/create/', views.customer_feedback_create, name='customer-feedback-create'),
+    path('feedback/<int:id>/', views.customer_feedback_detail, name='customer-feedback-detail'),
+    path('feedback/<int:id>/update/', views.customer_feedback_update, name='customer-feedback-update'),
+    path('feedback/<int:id>/delete/', views.customer_feedback_delete, name='customer-feedback-delete'),
+
+
+
 ]
 
 
