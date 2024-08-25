@@ -5,7 +5,10 @@ class CustomerFeedbackSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomerFeedback
         fields = ['id', 'service_id', 'rating', 'comments']
-        read_only_fields = ['id', 'service_id']
+        extra_kwargs = {
+            'service_id': {'required': False},
+            'rating': {'required': True},
+        }
 
     def validate_rating(self, value):
         """

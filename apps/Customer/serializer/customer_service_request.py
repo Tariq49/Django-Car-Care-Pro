@@ -81,16 +81,7 @@ class ServiceRequestSerializer(serializers.ModelSerializer):
   
 
     def update(self, instance, validated_data):
-
-        print("Raw validated_data:", validated_data)
-
         vehicles_data = validated_data.pop('vehicles', None)
-        print("Received vehicles_data:", vehicles_data)
-       
-        if vehicles_data is not None:
-            for vehicle_data in vehicles_data:
-                vehicle_id = vehicle_data.get('id')
-                print(f"Vehicle ID: {vehicle_id}") 
 
         instance.category = validated_data.get('category', instance.category)
         instance.problem_description = validated_data.get('problem_description', instance.problem_description)
@@ -99,5 +90,21 @@ class ServiceRequestSerializer(serializers.ModelSerializer):
         instance.status = validated_data.get('status', instance.status)
         instance.completed_date = validated_data.get('completed_date', instance.completed_date)
         instance.save()
+
+        if vehicles_data is not None:
+            # Handle vehicle updates if needed
+            for vehicle_data in vehicles_data:
+                vehicle_id = vehicle_data.get('id')
+                if vehicle_id:
+                    try:
+                        vehicle = Vehicle.objects.get(id=vehicle_id, service_request=instance)
+                        for attr, value in vehicle_data.items():
+                            setattr(vehicle, attr, value)
+                        vehicle.save()
+                    except Vehicle.DoesNotExist:
+                        # Handle the case where the vehicle does not exist
+                        pass
+                else:
+                    Vehicle.objects.create(service_request=instance, **vehicle_data)
 
         return instance
