@@ -1,4 +1,4 @@
-from .customer import list_customers,get_customer,create_customer,update_customer,delete_customer
+from .customer import customer_list_create, customer_detail
 from .customer_service_request import service_request_detail,list_service_requests
 from .user import create_user
 from .customer_feedback import feedback_detail,feedback_list_or_create

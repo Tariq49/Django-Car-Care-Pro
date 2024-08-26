@@ -5,11 +5,8 @@ app_name = 'customer-urls'
 urlpatterns = [
 
 
-    path('',views.list_customers, name='customers'),
-    path('<int:id>', views.get_customer, name='get-customer'),
-    path('create/', views.create_customer, name='create-customer'),
-    path('<int:id>/update', views.update_customer, name='update-customer'),
-    path('<int:id>/delete', views.delete_customer, name='delete-customer'),
+    path('', views.customer_list_create, name='customer_list_create'),
+    path('<int:id>/', views.customer_detail, name='customer_detail'),
     
     path('service/request/', views.list_service_requests, name='list_service_requests'), 
     path('service/request/<int:id>/', views.service_request_detail, name='service_request_detail'),  
@@ -21,5 +18,5 @@ urlpatterns = [
 
 ]
 
-
+ 
 
