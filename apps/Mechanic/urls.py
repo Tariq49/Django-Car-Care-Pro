@@ -1,7 +1,10 @@
 from django.urls import path
-from .views import mechanic_home,delete_account
+from . import views
+
+app_name = 'mechanic-urls'
 
 urlpatterns = [
-    path('mechanic/', mechanic_home, name='mechanic_home'),
-    path('delete-account/', delete_account, name='delete_account'),
+
+    path('', views.mechanic_list_create, name='mechanic_list_create'),
+    path('<int:id>/', views.mechanic_detail, name='mechanic_detail'),
 ]
