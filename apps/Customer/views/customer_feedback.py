@@ -6,6 +6,10 @@ from rest_framework.exceptions import ValidationError
 from apps.Customer.models.customer_feeback import CustomerFeedback
 from apps.Customer.serializer import CustomerFeedbackSerializer
 
+
+
+#--------------------------------------------- FUNCTION BASED VIEW--------------------------------------------------------------------
+
 @api_view(['GET', 'POST'])
 def feedback_list_or_create(request):
     """

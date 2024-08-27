@@ -17,7 +17,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path,include
-from apps.admin import views 
+from apps.User import views 
 
 admin.site.site_header = "CAR CARE PRO"
 admin.site.index_title = "A Premium Dealing Hub"
@@ -25,6 +25,7 @@ admin.site.site_title = "WELCOME TO CAR CARE PRO"
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('api/v1/user/', include('apps.User.urls',namespace='user-urls')),
     path('api/v1/customer/', include('apps.Customer.urls',namespace='customer-urls')),
     path('api/v1/mechanic/', include('apps.Mechanic.urls',namespace='mechanic-urls')),
 ]

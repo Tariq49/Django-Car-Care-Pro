@@ -6,6 +6,9 @@ from apps.Customer.models import Customer
 from apps.Customer.serializer import CustomerSerializer
 
 
+#--------------------------------------------- FUNCTION BASED VIEW--------------------------------------------------------------------
+
+
 @api_view(['GET', 'POST'])
 def customer_list_create(request):
     if request.method == 'GET':
@@ -23,6 +26,7 @@ def customer_list_create(request):
 
 @api_view(['GET', 'PUT', 'PATCH', 'DELETE'])
 def customer_detail(request, id):
+    
     try:
         customer = Customer.objects.get(id=id)
     except Customer.DoesNotExist:

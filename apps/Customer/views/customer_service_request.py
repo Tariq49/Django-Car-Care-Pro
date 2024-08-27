@@ -5,6 +5,9 @@ from apps.Customer.serializer.customer_service_request import ServiceRequestSeri
 from apps.Customer.models import ServiceRequest
 
 
+#--------------------------------------------- FUNCTION BASED VIEW--------------------------------------------------------------------
+
+
 @api_view(['GET', 'POST'])
 def list_service_requests(request):
     if request.method == 'GET':

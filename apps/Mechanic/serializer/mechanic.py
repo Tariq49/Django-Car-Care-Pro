@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.core.exceptions import ValidationError
 from apps.Mechanic.models import Mechanic,Specialization
-from apps.Customer.serializer.user import UserSerializer
+from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 
 
@@ -13,16 +13,12 @@ class SpecializationSerializer(serializers.ModelSerializer):
 
 class MechanicSerializer(serializers.ModelSerializer):
     
-    user = UserSerializer()
+    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 
     work_days = serializers.MultipleChoiceField(choices=Mechanic.DAYS_OF_WEEK, allow_empty=True)
     
 
-    specializations = serializers.ListField(
-        child=serializers.CharField(), 
-        write_only=True
-    )
-    specializations_display = serializers.SerializerMethodField()
+    specializations = serializers.ListField(child=serializers.CharField(), write_only=True)
    
     contact_number = serializers.CharField(
         validators=[RegexValidator(regex=r'^\d{9}$', message="Contact number should be exactly 9 digits.")]
@@ -31,7 +27,7 @@ class MechanicSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mechanic
         fields = [
-            'id', 'user', 'specializations', 'specializations_display', 'years_of_experience', 
+            'id', 'user', 'specializations', 'years_of_experience', 
             'preferred_job_types', 'address', 'gender', 'contact_number', 
             'profile_image', 'work_days'
         ]
@@ -69,28 +65,15 @@ class MechanicSerializer(serializers.ModelSerializer):
         return value
 
     def create(self, validated_data):
-
-        user_data = validated_data.pop('user')
         
-        # Create user
-        user_serializer = UserSerializer(data=user_data)
-        user_serializer.is_valid(raise_exception=True)
-        user = user_serializer.save()
-
         specializations_texts = validated_data.pop('specializations', [])
-        
-        # Convert names to Specialization instances
-        specializations = []
-        for text in specializations_texts:
-            specialization, created = Specialization.objects.get_or_create(name=text)
-            specializations.append(specialization)
-        
-        # Create mechanic instance
-        mechanic = Mechanic.objects.create(user=user, **validated_data)
-        
+
+        # Create the Mechanic instance
+        mechanic = Mechanic.objects.create(**validated_data)
+
         # Handle specializations
+        specializations = [Specialization.objects.get_or_create(name=text)[0] for text in specializations_texts]
         mechanic.specializations.set(specializations)
-        mechanic.save()
 
         return mechanic
 

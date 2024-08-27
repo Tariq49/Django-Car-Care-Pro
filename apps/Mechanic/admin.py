@@ -6,7 +6,7 @@ from apps.Mechanic.models import MechanicPricePerService
 
 
 class MechanicDetails(admin.ModelAdmin):
-    list_display = ('get_mechanic_name', 'years_of_experience','get_specializations','contact_number','preferred_job_types','formatted_work_days')
+    list_display = ('id','get_mechanic_name', 'years_of_experience','get_specializations','contact_number','preferred_job_types','formatted_work_days')
 
     def get_mechanic_name(self, obj):
         return f"{obj.user.first_name} {obj.user.last_name}"

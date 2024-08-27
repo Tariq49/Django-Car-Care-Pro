@@ -8,7 +8,7 @@ class VehicleInline(admin.TabularInline):
     extra = 1 
 
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ('full_name','username','address','contact_number','email','date_of_join')
+    list_display = ('id','full_name','username','address','contact_number','email','date_of_join')
 
     def full_name(self, obj):
         return f"{obj.user.first_name} {obj.user.last_name}"
@@ -26,7 +26,7 @@ class CustomerAdmin(admin.ModelAdmin):
 class ServiceRequestAdmin(admin.ModelAdmin):
     inlines = [VehicleInline] 
     
-    list_display = ('customer', 'vehicle_details', 'service_name', 'problem_description','mechanic_assigned', 'status', 'date_of_request')
+    list_display = ('id','customer', 'vehicle_details', 'service_name', 'problem_description','mechanic_assigned', 'status', 'date_of_request')
 
     def customer(self, obj):
         return obj.customer.user.username

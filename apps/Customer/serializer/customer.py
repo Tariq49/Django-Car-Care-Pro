@@ -2,11 +2,11 @@
 from rest_framework import serializers
 from django.core.validators import RegexValidator
 from apps.Customer.models import Customer
-from .user import UserSerializer
+from django.contrib.auth.models import User
 
 class CustomerSerializer(serializers.ModelSerializer):
 
-    user = UserSerializer()
+    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 
 
     contact_number = serializers.CharField(
@@ -20,21 +20,14 @@ class CustomerSerializer(serializers.ModelSerializer):
         return value
     
     def create(self, validated_data):
-        user_data = validated_data.pop('user')
-        user = UserSerializer().create(user_data)
+        user = validated_data.pop('user')
         customer = Customer.objects.create(user=user, **validated_data)
         return customer
     
     def update(self, instance, validated_data):
-        user_data = validated_data.pop('user', None)
-        if user_data:
-            user_serializer = UserSerializer(instance.user, data=user_data, partial=True)
-            if user_serializer.is_valid():
-                user_serializer.save()
-            else:
-                raise serializers.ValidationError(user_serializer.errors)
+        instance.user = validated_data.get('user', instance.user)
         return super().update(instance, validated_data)
-
+    
     class Meta:
         model = Customer
         fields = '__all__'
