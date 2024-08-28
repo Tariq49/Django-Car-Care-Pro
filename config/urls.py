@@ -28,6 +28,7 @@ urlpatterns = [
     path('api/v1/user/', include('apps.User.urls',namespace='user-urls')),
     path('api/v1/customer/', include('apps.Customer.urls',namespace='customer-urls')),
     path('api/v1/mechanic/', include('apps.Mechanic.urls',namespace='mechanic-urls')),
+    path('api/v1/auth/', include('dj_rest_auth.urls'))
 ]
 
 

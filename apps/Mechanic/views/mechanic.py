@@ -15,9 +15,7 @@ from apps.Mechanic.serializer import MechanicSerializer
 
 class MechanicListCreateView(APIView):
     
-    authentication_classes = (BasicAuthentication, )
-
-    permission_classes = (IsAuthenticated, )
+    
 
     def get(self, request):
         mechanics = Mechanic.objects.all()
@@ -35,11 +33,6 @@ class MechanicListCreateView(APIView):
 class MechanicDetailView(APIView):
 
     
-
-    authentication_classes = (BasicAuthentication, )
-
-    permission_classes = (IsAuthenticated, )
-
     def get(self, request, pk):
         try:
             mechanic = Mechanic.objects.get(pk=pk)
