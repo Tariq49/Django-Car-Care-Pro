@@ -109,6 +109,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':(
+        
         'rest_framework.authentication.TokenAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES':(
@@ -117,6 +118,6 @@ REST_FRAMEWORK = {
 }
 
 """
-curl -H 'Authorization: Token ee822c698ea683b9c9d38e42d610866eb7cd1f04' http://127.0.0.1:8000/api/v1/mechanic/
+ 'rest_framework.authentication.SessionAuthentication',
 
 """
