@@ -117,6 +117,6 @@ REST_FRAMEWORK = {
 }
 
 """
-curl -H 'Authorization: Token ee822c698ea683b9c9d38e42d610866eb7cd1f04' http://127.0.0.1:8000/api/v1/mechanic/
+curl -H 'Authorization: Token ee822c698ea683b9c9d38e42d610866eb7cd1f04' http://127.0.0.1:8000/api/v1/customer/1/
 
 """
