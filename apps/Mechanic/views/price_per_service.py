@@ -8,7 +8,6 @@ from django.shortcuts import get_list_or_404
 
 
 @api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
 def mechanic_price_per_service_list(request):
     """
     list all mechanic prices per service records or create a new one.
@@ -31,7 +30,6 @@ def mechanic_price_per_service_list(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 @api_view(['GET', 'PUT', 'DELETE'])
-@permission_classes([IsAuthenticated])
 def mechanic_price_per_service_detail(request, pk):
     """
     Retrieve, update or delete a mechanic price per service record.

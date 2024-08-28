@@ -1,8 +1,10 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 from apps.Mechanic.models import Mechanic
 from apps.Mechanic.serializer import MechanicSerializer
+
 
 
 
@@ -11,6 +13,8 @@ from apps.Mechanic.serializer import MechanicSerializer
 
 class MechanicListCreateView(APIView):
     
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         mechanics = Mechanic.objects.all()
         serializer = MechanicSerializer(mechanics, many=True)
@@ -25,6 +29,9 @@ class MechanicListCreateView(APIView):
 
 
 class MechanicDetailView(APIView):
+
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, pk):
         try:
             mechanic = Mechanic.objects.get(pk=pk)
