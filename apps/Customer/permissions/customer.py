@@ -1,14 +1,6 @@
 
 from rest_framework.permissions import BasePermission
 
-class IsCustomerOrReadOnly(BasePermission):
-    """
-    Custom permission to ensure customers can only access their own data.
-    """
-
-    def has_object_permission(self, request, view, obj):
-        return request.method in ['GET'] and obj.user == request.user
-    
     
 class IsOwnCustomer(BasePermission):
     """

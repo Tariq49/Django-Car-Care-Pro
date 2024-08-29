@@ -5,7 +5,7 @@ from rest_framework import status
 from apps.Customer.models import ServiceRequest
 from apps.Customer.models import Customer
 from apps.Customer.serializer import CustomerSerializer
-from apps.Customer.permissions.customer import IsCustomerOrReadOnly, IsOwnCustomer
+from apps.Customer.permissions.customer import  IsOwnCustomer
 
 
 #--------------------------------------------- FUNCTION BASED VIEW--------------------------------------------------------------------
