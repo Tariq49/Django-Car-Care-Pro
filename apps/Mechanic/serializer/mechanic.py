@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 
 
+
 class SpecializationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Specialization
@@ -95,3 +96,5 @@ class MechanicSerializer(serializers.ModelSerializer):
         
         instance.save()
         return instance
+
+

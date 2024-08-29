@@ -17,8 +17,10 @@ class IsMechanicOrCustomer(BasePermission):
         if request.user.is_customer:
             return True
         
-        # Mechanics can only view or edit their own data
-        if request.user.is_mechanic:
-            return obj.id == request.user.mechanic.id
+          # Check if the user is a mechanic
+        mechanic_profile = getattr(request.user, 'mechanic', None)
+        if mechanic_profile:
+            # Mechanics can only view or edit their own data
+            return obj.mechanic == mechanic_profile
         
         return False
