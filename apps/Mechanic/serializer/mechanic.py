@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 
 
+
 class SpecializationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Specialization
@@ -67,6 +68,11 @@ class MechanicSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         
         specializations_texts = validated_data.pop('specializations', [])
+        
+        # Check if the mechanic already exists for the user
+        user = validated_data.get('user')
+        if Mechanic.objects.filter(user=user).exists():
+            raise serializers.ValidationError("A mechanic with this user ID already exists.")
 
         # Create the Mechanic instance
         mechanic = Mechanic.objects.create(**validated_data)
@@ -95,3 +101,5 @@ class MechanicSerializer(serializers.ModelSerializer):
         
         instance.save()
         return instance
+
+

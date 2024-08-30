@@ -3,6 +3,7 @@ from rest_framework import serializers
 from django.core.validators import RegexValidator
 from apps.Customer.models import Customer
 from django.contrib.auth.models import User
+from rest_framework.exceptions import ValidationError
 
 class CustomerSerializer(serializers.ModelSerializer):
 
@@ -12,6 +13,12 @@ class CustomerSerializer(serializers.ModelSerializer):
     contact_number = serializers.CharField(
         validators=[RegexValidator(regex=r'^\d{9}$', message="Contact number should be exactly 9 digits.")]
     )
+    
+    def validate(self, data):
+        user = data.get('user')
+        if Customer.objects.filter(user=user).exists():
+            raise ValidationError({"user": "This user already has a customer record."})
+        return data
 
     def validate_gender(self, value):
         """Validate that the gender is either 'M' or 'F'."""

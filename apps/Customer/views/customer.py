@@ -21,6 +21,11 @@ def customer_list_create(request):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     elif request.method == 'POST':
+        
+        user_id = request.data.get('user')
+        if Customer.objects.filter(user=user_id).exists():
+            return Response({'error': 'This user already has a customer record.'}, status=status.HTTP_400_BAD_REQUEST)
+        
         serializer = CustomerSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(user=request.user)

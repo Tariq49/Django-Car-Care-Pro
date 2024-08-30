@@ -53,4 +53,4 @@ class Vehicle(models.Model):
     vehicle_brand = models.CharField(max_length=50)
 
     def __str__(self):
-        return f'{self.vehicle_brand} {self.vehicle_model} ({self.vehicle_no})'
+        return f'{self.vehicle_name} {self.vehicle_brand} {self.vehicle_model} ({self.vehicle_no})'
