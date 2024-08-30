@@ -48,6 +48,10 @@ class ServiceRequestSerializer(serializers.ModelSerializer):
         model = ServiceRequest
         fields = '__all__'
         
+    def validate_mechanic(self, value):
+        if value and not MechanicPricePerService.objects.filter(pk=value.pk).exists():
+            raise serializers.ValidationError("Invalid mechanic selected.")
+        return value
 
     def get_service_request_id(self, obj):
         return obj.id
@@ -62,7 +66,8 @@ class ServiceRequestSerializer(serializers.ModelSerializer):
         if customer is None:
             raise serializers.ValidationError({'customer': 'This field is required.'})
         
-
+      #  service_request = ServiceRequest.objects.create(**validated_data)
+         
         service_request = ServiceRequest.objects.create(
             customer=customer,
             mechanic=mechanic,

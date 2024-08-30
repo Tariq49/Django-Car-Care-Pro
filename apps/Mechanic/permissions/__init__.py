@@ -1,0 +1,1 @@
+from apps.Mechanic.permissions.mechanic import IsMechanicOrCustomer

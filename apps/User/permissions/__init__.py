@@ -1,0 +1,1 @@
+from apps.User.permissions.user import IsAdminUser
