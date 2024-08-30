@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MinValueValidator
 from apps.Mechanic.models import Mechanic
 from apps.core.constants import SERVICE_NEEDED_CHOICES
+from django.core.exceptions import ValidationError
 
 class MechanicPricePerService(models.Model):
 
@@ -22,5 +23,9 @@ class MechanicPricePerService(models.Model):
     def __str__(self):
         return f"{self.mechanic.user.first_name}{self.mechanic.user.last_name} - {self.mechanic.years_of_experience} years exp- {self.service_name} - {self.hourly_rate} {self.currency}"
 
+    
     class Meta:
         verbose_name = "Mechanic Price Per Service"
+        constraints = [
+            models.UniqueConstraint(fields=['mechanic', 'service_name'], name='unique_user_specialization')
+        ]

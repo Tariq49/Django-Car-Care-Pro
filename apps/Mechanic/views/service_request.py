@@ -1,12 +1,11 @@
-from rest_framework import status,serializers
+from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from apps.Customer.models import ServiceRequest
 from apps.Customer.serializer.customer_service_request import ServiceRequestSerializer
 from apps.Mechanic.permissions.mechanic import IsMechanicOrCustomer
-from django.utils import timezone
-from apps.Mechanic.models import MechanicPricePerService,Mechanic
+from apps.Mechanic.models import MechanicPricePerService
 
 
 
