@@ -1,4 +1,4 @@
-from rest_framework import status
+from rest_framework import status,serializers
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -6,7 +6,8 @@ from apps.Customer.models import ServiceRequest
 from apps.Customer.serializer.customer_service_request import ServiceRequestSerializer
 from apps.Mechanic.permissions.mechanic import IsMechanicOrCustomer
 from django.utils import timezone
-from apps.Mechanic.models import MechanicPricePerService
+from apps.Mechanic.models import MechanicPricePerService,Mechanic
+
 
 
 @api_view(['GET'])
@@ -72,6 +73,9 @@ def update_service_request(request, pk):
                     return Response({'completed_date': 'This field is required when status is Completed.'},
                                     status=status.HTTP_400_BAD_REQUEST)
                 updated_service_request.completed_date = request.data.get('completed_date')
+            elif updated_service_request.status in ['Pending', 'In Progress']:
+                # If status is 'Pending' or 'In Progress', reset completed_date
+                updated_service_request.completed_date = None    
             else:
                 # If status is not 'Completed', reset completed_date
                 updated_service_request.completed_date = None

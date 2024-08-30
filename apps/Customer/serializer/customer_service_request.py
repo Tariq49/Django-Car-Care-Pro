@@ -40,7 +40,7 @@ class ServiceRequestSerializer(serializers.ModelSerializer):
 
     customer = serializers.PrimaryKeyRelatedField(queryset=Customer.objects.all())
     mechanic = serializers.PrimaryKeyRelatedField(queryset=MechanicPricePerService.objects.all(), required=False, allow_null=True)
-    vehicles = VehicleSerializer(many=True, required=False)
+    vehicles = VehicleSerializer(many=True, required=False) # modify 
 
     service_request_id = serializers.SerializerMethodField()
     
