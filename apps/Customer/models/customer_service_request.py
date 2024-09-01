@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from apps.core.constants import SERVICE_NEEDED_CHOICES
 from apps.Mechanic.models.price_per_service import MechanicPricePerService
 from django.utils import timezone
+from datetime import timedelta
+from apps.Customer.models import Customer
 
 
 class ServiceRequest(models.Model):
@@ -15,7 +17,7 @@ class ServiceRequest(models.Model):
         ('Three_wheeler','Three_wheeler')
     ]
     
-    customer = models.ForeignKey('Customer', on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
     problem_description = models.TextField()
     date_of_request = models.DateTimeField(default=timezone.now)  
@@ -23,12 +25,14 @@ class ServiceRequest(models.Model):
     mechanic = models.ForeignKey(MechanicPricePerService, on_delete=models.SET_NULL, null=True)
     mechanic_update = models.TextField(blank=True, null=True)  # Mechanic's updates about the work
     status = models.CharField(max_length=20, default='Pending')  # e.g., Pending, In Progress, Completed
+    due_date =  models.DateTimeField(blank=True, null=True)
     completed_date = models.DateTimeField(blank=True, null=True)
+    
                                           
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['customer',  'problem_description','service_name'], name='unique_service_request')
-        ]
+   # class Meta:
+    #    constraints = [
+    #        models.UniqueConstraint(fields=['customer',  'problem_description','service_name'], name='unique_service_request')
+    #    ]
 
    
     def __str__(self):

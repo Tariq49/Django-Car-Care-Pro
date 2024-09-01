@@ -19,6 +19,10 @@ class MechanicListCreateView(APIView):
 
     def get(self, request):
         mechanics = Mechanic.objects.all()
+        
+        if not mechanics.exists():
+            return Response({"message": "No mechanics available at the moment."}, status=status.HTTP_200_OK)
+        
         serializer = MechanicSerializer(mechanics, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     

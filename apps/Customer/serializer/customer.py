@@ -27,9 +27,13 @@ class CustomerSerializer(serializers.ModelSerializer):
         return value
     
     def create(self, validated_data):
-        user = validated_data.pop('user')
-        customer = Customer.objects.create(user=user, **validated_data)
-        return customer
+        user = validated_data.get('user')
+        user_id = user.id if isinstance(user, User) else user  
+        print('customer----------', user_id) 
+        
+        if Customer.objects.filter(user=user).exists():
+            raise serializers.ValidationError("This user already has a customer record.")
+        return super().create(validated_data)
     
     def update(self, instance, validated_data):
         instance.user = validated_data.get('user', instance.user)

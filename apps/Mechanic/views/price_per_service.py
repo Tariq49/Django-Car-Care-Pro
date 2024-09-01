@@ -1,7 +1,7 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from apps.Mechanic.models import MechanicPricePerService
+from apps.Mechanic.models import MechanicPricePerService,Mechanic
 from apps.Mechanic.serializer.price_per_service import MechanicPricePerServiceSerializer
 from django.http import Http404
 
@@ -18,6 +18,9 @@ def mechanic_price_per_service_list(request):
             services = MechanicPricePerService.objects.filter(mechanic_id=mechanic_id)
         else:
             services = MechanicPricePerService.objects.all()
+            
+            if not services.exists():
+                return Response({'message': 'No mechanics available.'}, status=status.HTTP_404_NOT_FOUND)
 
         serializer = MechanicPricePerServiceSerializer(services, many=True)
         return Response(serializer.data)
@@ -25,6 +28,9 @@ def mechanic_price_per_service_list(request):
     elif request.method =='POST':
         serializer = MechanicPricePerServiceSerializer(data=request.data)
         if serializer.is_valid():
+            mechanic_id = request.data.get('mechanic')
+            if not Mechanic.objects.filter(id=mechanic_id).exists():
+                return Response({'mechanic': 'Invalid mechanic ID.'}, status=status.HTTP_400_BAD_REQUEST)
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

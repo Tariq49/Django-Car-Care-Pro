@@ -21,11 +21,10 @@ class MechanicPricePerService(models.Model):
     currency = models.CharField(max_length=6, choices=CURRENCY_CHOICES, default='Euro')
 
     def __str__(self):
-        return f"{self.mechanic.user.first_name}{self.mechanic.user.last_name} - {self.mechanic.years_of_experience} years exp- {self.service_name} - {self.hourly_rate} {self.currency}"
-
+        return f"{self.mechanic}  {self.service_name} {self.hourly_rate} {self.currency}"
     
     class Meta:
         verbose_name = "Mechanic Price Per Service"
         constraints = [
-            models.UniqueConstraint(fields=['mechanic', 'service_name'], name='unique_user_specialization')
+            models.UniqueConstraint(fields=['mechanic', 'service_name'], name='unique_user_service')
         ]

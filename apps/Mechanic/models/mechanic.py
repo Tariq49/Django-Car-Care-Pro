@@ -34,10 +34,9 @@ class Mechanic(models.Model):
     
 
     
+    
     def __str__(self):
-       
-        return (f"{self.user.first_name} {self.user.last_name} - "
-                f"{self.years_of_experience} years exp - ")
+        return f"{self.user.get_full_name()} - {self.years_of_experience} years exp"
 
     class Meta:
         verbose_name_plural = 'Mechanic'
