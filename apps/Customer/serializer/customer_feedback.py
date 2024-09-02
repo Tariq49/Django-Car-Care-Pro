@@ -2,6 +2,8 @@ from rest_framework import serializers
 from apps.Customer.models import CustomerFeedback
 
 class CustomerFeedbackSerializer(serializers.ModelSerializer):
+    
+    
     class Meta:
         model = CustomerFeedback
         fields = ['id', 'service_id', 'rating', 'comments']

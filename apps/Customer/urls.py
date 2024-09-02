@@ -12,7 +12,7 @@ urlpatterns = [
     path('service/request/detail/', views.service_request_detail, name='service_request_detail'),  
 
     path('feedback/', views.feedback_list_or_create, name='feedback-list-or-create'),
-    path('feedback/<int:id>/', views.feedback_detail, name='feedback-detail'),
+    path('feedback/detail/', views.feedback_detail, name='feedback-detail'),
 
     
 
