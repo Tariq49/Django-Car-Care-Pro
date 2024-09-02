@@ -29,7 +29,10 @@ THIRD_PARTY_APPS = [
     'rest_framework',  # third party library
     'rest_framework.authtoken',
     
-]        
+]     
+
+
+
 
 INSTALLED_APPS = [*DEFAULT_APPS, *CREATED_APP, *THIRD_PARTY_APPS]
 

@@ -5,6 +5,10 @@ from django.contrib.auth.models import User
 from apps.User.serializer import UserSerializer
 from apps.User.permissions import IsAdminUser
 
+from rest_framework.permissions import IsAuthenticated
+from django.http import JsonResponse
+
+
 
 @api_view(['GET', 'POST'])
 @permission_classes([IsAdminUser])
@@ -13,6 +17,13 @@ def user_list_create(request):
     List all users or create a new user.
     """
     if request.method == 'GET':
+        
+        if not request.user.is_authenticated:
+            return JsonResponse({'error': 'You are not authenticated. Please log in.'}, status=401)
+        
+        if not request.user.is_staff:
+            return Response({'error': 'Only admins can list users.'}, status=status.HTTP_403_FORBIDDEN)
+    
         users = User.objects.all()
         serializer = UserSerializer(users, many=True, context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -24,6 +35,7 @@ def user_list_create(request):
             return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+
 
 @api_view(['GET', 'PUT', 'PATCH', 'DELETE'])
 @permission_classes([IsAdminUser])

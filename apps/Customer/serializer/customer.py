@@ -5,6 +5,7 @@ from apps.Customer.models import Customer
 from django.contrib.auth.models import User
 from rest_framework.exceptions import ValidationError
 
+
 class CustomerSerializer(serializers.ModelSerializer):
 
     user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
@@ -29,7 +30,7 @@ class CustomerSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = validated_data.get('user')
         user_id = user.id if isinstance(user, User) else user  
-        print('customer----------', user_id) 
+        
         
         if Customer.objects.filter(user=user).exists():
             raise serializers.ValidationError("This user already has a customer record.")
@@ -43,6 +44,4 @@ class CustomerSerializer(serializers.ModelSerializer):
         model = Customer
         fields = '__all__'
         read_only_fields = ['user']
-
-
 

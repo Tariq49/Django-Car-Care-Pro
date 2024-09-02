@@ -29,7 +29,7 @@ class ServiceRequestSerializer(serializers.ModelSerializer):
         fields = [
             'service_request_id','customer', 'mechanic','mechanic_details', 'vehicles', 'category',
             'problem_description', 'date_of_request', 'service_name',
-            'status', 'due_date', 'completed_date'
+            'status', 'due_date', 'completed_date', 'mechanic_update'
         ]
         
     def get_service_request_id(self, obj):
@@ -66,10 +66,9 @@ class ServiceRequestSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError("MechanicPricePerService with this ID does not exist.")
 
         # Handle due_date if not provided
-        due_date = validated_data.get('due_date')
-        if due_date is None:
-            due_date = timezone.now() + timedelta(days=7)
-
+        due_date = validated_data.get('due_date') or None
+        if not due_date:
+            due_date = timezone.now() + timedelta(days=7) 
 
         # Check for existing request
         existing_request = ServiceRequest.objects.filter(
@@ -88,8 +87,9 @@ class ServiceRequestSerializer(serializers.ModelSerializer):
             category=validated_data.get('category'),
             problem_description=validated_data.get('problem_description'),
             service_name=validated_data.get('service_name'),
+            mechanic_update=validated_data.get('mechanic_update'),
             status=validated_data.get('status', 'Pending'),
-            due_date=validated_data.get('due_date'),
+            due_date=due_date,
             date_of_request=timezone.now(),  
             completed_date=validated_data.get('completed_date')
         )
@@ -113,6 +113,7 @@ class ServiceRequestSerializer(serializers.ModelSerializer):
         instance.status = validated_data.get('status', instance.status)
         instance.due_date = validated_data.get('due_date', instance.due_date)
         instance.completed_date = validated_data.get('completed_date', instance.completed_date)
+        instance.mechanic_update = validated_data.get('mechanic_update',instance.mechanic_update)
         
         instance.save()
 

@@ -12,15 +12,18 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 @api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated,IsOwnCustomer])
 def list_service_requests(request):
     
     user = request.user
     
     if request.method == 'GET':
         
-        service_requests = ServiceRequest.objects.filter(customer=user.customer)  # Assuming there's a relation
-
+        try:
+            # Fetch service requests for the authenticated customer
+            service_requests = ServiceRequest.objects.filter(customer=user.customer)
+        except AttributeError:
+            return Response({'error': 'User does not have an associated customer record.'}, status=status.HTTP_400_BAD_REQUEST)
         
        # service_requests = ServiceRequest.objects.all()
         
@@ -44,36 +47,34 @@ def list_service_requests(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@csrf_exempt
 @api_view(['GET', 'PUT', 'PATCH', 'DELETE'])
 @permission_classes([IsAuthenticated, IsOwnCustomer])
-def service_request_detail(request, id):
+def service_request_detail(request):
     
+    # Extract the service request id from the request data (POST body or query params)
+    service_request_id = request.data.get('id') if request.method in ['PUT', 'PATCH', 'DELETE'] else request.query_params.get('id')
+    
+    if not service_request_id:
+        return Response({'error': 'ID parameter is missing.'}, status=status.HTTP_400_BAD_REQUEST)
+
     try:
-        
-        service_request = ServiceRequest.objects.get(id=id)
-        
+        # Fetch the service request ensuring it belongs to the authenticated customer
+        service_request = ServiceRequest.objects.get(id=service_request_id, customer=request.user.customer)
     except ServiceRequest.DoesNotExist:
-        
-        return Response({'error': 'Service Request not found'}, status=status.HTTP_404_NOT_FOUND)
+        return Response({'error': 'Service Request not found or not authorized'}, status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        
         serializer = ServiceRequestSerializer(service_request)
-        
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     elif request.method in ['PUT', 'PATCH']:
-        
         serializer = ServiceRequestSerializer(service_request, data=request.data, partial=True)
-        
         if serializer.is_valid():
-            
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
-        
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
-        
         service_request.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response({'message': 'Service request deleted successfully.'}, status=status.HTTP_204_NO_CONTENT)

@@ -14,9 +14,10 @@ class IsAdminUser(BasePermission):
             # Allow anyone to POST (create) a user
             return True
         
-        if request.method == 'GET':
-            # Allow only admin users to GET (list) users
+        if request.method in ['GET', 'PUT', 'DELETE', 'PATCH']:
+            # Allow only admin users to GET (list), PUT (update), DELETE, or PATCH users
             return request.user and request.user.is_authenticated and request.user.is_staff
+            
 
         return False
 
