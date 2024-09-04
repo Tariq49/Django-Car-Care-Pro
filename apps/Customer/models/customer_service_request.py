@@ -45,8 +45,12 @@ class ServiceRequest(models.Model):
     
     def save(self, *args, **kwargs):
         # Automatically set the completed date when the status is set to 'Completed'
+        if not self.due_date:
+            self.due_date = self.date_of_request + timedelta(weeks=1)  
+            
         if self.status == 'Completed' and self.completed_date is None:
             self.completed_date = timezone.now()
+          
         super(ServiceRequest, self).save(*args, **kwargs)     
 
 class Vehicle(models.Model):

@@ -6,7 +6,7 @@ from apps.Customer.models import ServiceRequest
 from apps.Customer.serializer.customer_service_request import ServiceRequestSerializer
 from apps.Mechanic.permissions.mechanic import IsMechanicOrOwner
 from apps.Mechanic.models import MechanicPricePerService
-
+from apps.Mechanic.serializer.service_request import MechanicUpdateServiceRequestSerializer
 
 
 @api_view(['GET'])
@@ -32,6 +32,10 @@ def mechanic_service_requests(request):
 
         # Filter service requests based on MechanicPricePerService instance
         service_requests = ServiceRequest.objects.filter(mechanic=mechanic_service)
+        
+        if not service_requests.exists():
+            return Response({'detail': "You don't have any service requests."}, status=status.HTTP_200_OK)
+        
         serializer = ServiceRequestSerializer(service_requests, many=True)
         return Response(serializer.data)
     except Exception as e:
@@ -61,50 +65,35 @@ def update_service_request(request, pk):
         if service_request.mechanic != mechanic_service:
             return Response({'detail': 'Not authorized to update this request'}, status=status.HTTP_403_FORBIDDEN)
 
-        
-       
-        
         # Update fields if the user is authorized
-        serializer = ServiceRequestSerializer(service_request, data=request.data, partial=True)
-        
+        serializer = MechanicUpdateServiceRequestSerializer(service_request, data=request.data, partial=True)
+
         if serializer.is_valid():
-            
             updated_service_request = serializer.save()
-            
-            print('update service request-----------',updated_service_request)
 
             # Validate that completed_date can only be set if status is 'Completed'
             if updated_service_request.status == 'Completed':
-                
                 if not request.data.get('completed_date'):
-                    return Response({'completed_date': 'This field is required when status is Completed.'},
-                                    status=status.HTTP_400_BAD_REQUEST)
-                
+                    return Response(
+                        {'completed_date': 'This field is required when status is Completed.'},
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
                 updated_service_request.completed_date = request.data.get('completed_date')
-                
-            elif updated_service_request.status in ['Pending', 'In Progress']:
-                
-                # Allow completed_date to be empty when status is 'Pending' or 'In Progress'
-                if 'completed_date' in request.data and request.data.get('completed_date') is not None:
-                    return Response({'error': 'You can only set completed_date when status is Completed.'},
-                                    status=status.HTTP_400_BAD_REQUEST)
-                updated_service_request.completed_date = None
-                
-                
-            if 'due_date' in request.data:
-                updated_service_request.due_date = request.data.get('due_date')
-            else:
-                updated_service_request.due_date = service_request.due_date  
 
-            
+            elif updated_service_request.status in ['Pending', 'In Progress']:
+                if 'completed_date' in request.data and request.data.get('completed_date') is not None:
+                    return Response(
+                        {'error': 'You can only set completed_date when status is Completed.'},
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+                updated_service_request.completed_date = None
+
             updated_service_request.save()
-            
-            return Response(ServiceRequestSerializer(updated_service_request).data)
-        
+
+            return Response(MechanicUpdateServiceRequestSerializer(updated_service_request).data)
+
         else:
-            
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
+
     except Exception as e:
-        
         return Response({'detail': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

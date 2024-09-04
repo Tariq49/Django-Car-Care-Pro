@@ -74,9 +74,9 @@ class ServiceRequestSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError("MechanicPricePerService with this ID does not exist.")
 
         # Handle due_date if not provided
-        due_date = validated_data.get('due_date') or None
-        if not due_date:
-            due_date = timezone.now() + timedelta(days=7) 
+      #  due_date = validated_data.get('due_date') or None
+      #  if not due_date:
+       #     due_date = timezone.now() + timedelta(days=7) 
 
         # Check for existing request
         existing_request = ServiceRequest.objects.filter(
@@ -97,7 +97,7 @@ class ServiceRequestSerializer(serializers.ModelSerializer):
             service_name=validated_data.get('service_name'),
             mechanic_update=validated_data.get('mechanic_update'),
             status=validated_data.get('status', 'Pending'),
-            due_date=due_date,
+            due_date=validated_data.get('due_date'),
             date_of_request=timezone.now(),  
             completed_date=validated_data.get('completed_date')
         )
