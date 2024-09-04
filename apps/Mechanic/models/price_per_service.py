@@ -25,6 +25,4 @@ class MechanicPricePerService(models.Model):
     
     class Meta:
         verbose_name = "Mechanic Price Per Service"
-        constraints = [
-            models.UniqueConstraint(fields=['mechanic', 'service_name'], name='unique_user_service')
-        ]
+        unique_together = ('mechanic', 'service_name', 'currency')

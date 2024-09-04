@@ -36,4 +36,29 @@ class MechanicPricePerServiceSerializer(serializers.ModelSerializer):
         # Ensure obj.mechanic is a valid Mechanic instance
         if obj.mechanic and obj.mechanic.years_of_experience is not None:
             return obj.mechanic.years_of_experience
-        return "Unknown"  #
+        return "Unknown"  
+    
+    def validate(self, data):
+        mechanic = data.get('mechanic')
+        service_name = data.get('service_name')
+        currency = data.get('currency')
+
+        # Check if the instance is set (i.e., update case) or not (i.e., creation case)
+        if self.instance:
+            # For updates, exclude the current instance from the check
+            if MechanicPricePerService.objects.filter(
+                mechanic=mechanic,
+                service_name=service_name,
+                currency=currency
+            ).exclude(id=self.instance.id).exists():
+                raise serializers.ValidationError("This service for the mechanic already exists.")
+        else:
+            # For creation, check if a similar record already exists
+            if MechanicPricePerService.objects.filter(
+                mechanic=mechanic,
+                service_name=service_name,
+                currency=currency
+            ).exists():
+                raise serializers.ValidationError("This service for the mechanic already exists.")
+
+        return data

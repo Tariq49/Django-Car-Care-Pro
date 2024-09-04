@@ -50,6 +50,7 @@ class ServiceRequest(models.Model):
         super(ServiceRequest, self).save(*args, **kwargs)     
 
 class Vehicle(models.Model):
+    
     service_request = models.ForeignKey(ServiceRequest, on_delete=models.CASCADE, related_name='vehicles', null=True)
     vehicle_no = models.CharField(max_length=20)
     vehicle_name = models.CharField(max_length=50)

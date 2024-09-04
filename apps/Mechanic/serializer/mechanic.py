@@ -5,17 +5,12 @@ from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 
 
-
-        
-
 class MechanicSerializer(serializers.ModelSerializer):
     
     user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
-    user_full_name = serializers.SerializerMethodField()
+    mechanic_name = serializers.SerializerMethodField()
     work_days = serializers.MultipleChoiceField(choices=Mechanic.DAYS_OF_WEEK, allow_empty=True)
     
-
- 
    
     contact_number = serializers.CharField(
         validators=[RegexValidator(regex=r'^\d{9}$', message="Contact number should be exactly 9 digits.")]
@@ -24,12 +19,12 @@ class MechanicSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mechanic
         fields = [
-            'id', 'user','user_full_name', 'years_of_experience', 
+            'id', 'user','mechanic_name', 'years_of_experience', 
             'preferred_job_types', 'address', 'gender', 'contact_number', 
             'profile_image', 'work_days'
         ]
     
-    def get_user_full_name(self, obj):
+    def get_mechanic_name(self, obj):
        
         user = obj.user
         if user:

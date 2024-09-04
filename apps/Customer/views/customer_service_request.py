@@ -76,5 +76,9 @@ def service_request_detail(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
+        
+        if request.user.customer != service_request.customer:
+            return Response({'error': 'You do not have permission to delete this service request.'}, status=status.HTTP_403_FORBIDDEN)
+        
         service_request.delete()
         return Response({'message': 'Service request deleted successfully.'}, status=status.HTTP_204_NO_CONTENT)

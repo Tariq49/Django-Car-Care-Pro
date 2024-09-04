@@ -9,7 +9,7 @@ from rest_framework.exceptions import ValidationError
 class CustomerSerializer(serializers.ModelSerializer):
 
     user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
-
+    customer_name = serializers.SerializerMethodField()
 
     contact_number = serializers.CharField(
         validators=[RegexValidator(regex=r'^\d{9}$', message="Contact number should be exactly 9 digits.")]
@@ -21,6 +21,10 @@ class CustomerSerializer(serializers.ModelSerializer):
             raise ValidationError({"user": "This user already has a customer record."})
         return data
 
+    def get_customer_name(self, obj):
+        return f"{obj.user.first_name} {obj.user.last_name}".strip() if obj.user else None
+
+    
     def validate_gender(self, value):
         """Validate that the gender is either 'M' or 'F'."""
         if value not in dict(Customer._meta.get_field('gender').choices):
@@ -43,5 +47,5 @@ class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
         fields = '__all__'
-        read_only_fields = ['user']
+        read_only_fields = ['user', 'customer_name']
 

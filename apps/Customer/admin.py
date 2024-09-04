@@ -43,6 +43,7 @@ class ServiceRequestAdmin(admin.ModelAdmin):
 
 class CustomerFeedbackAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
         'get_customer_name', 
         'service_name', 
         'problem_description', 

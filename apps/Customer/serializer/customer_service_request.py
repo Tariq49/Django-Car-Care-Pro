@@ -22,18 +22,26 @@ class ServiceRequestSerializer(serializers.ModelSerializer):
     mechanic_details = serializers.SerializerMethodField()
     vehicles = VehicleSerializer(many=True)
     service_request_id = serializers.SerializerMethodField()
-  
+    customer_name = serializers.SerializerMethodField() 
     
     class Meta:
         model = ServiceRequest
         fields = [
-            'service_request_id','customer', 'mechanic','mechanic_details', 'vehicles', 'category',
+            'service_request_id','customer','customer_name', 'mechanic','mechanic_details', 'vehicles', 'category',
             'problem_description', 'date_of_request', 'service_name',
             'status', 'due_date', 'completed_date', 'mechanic_update'
         ]
         
     def get_service_request_id(self, obj):
         return obj.id 
+    
+      
+    def get_customer_name(self, obj):
+        # Adjust based on how customer name can be accessed
+        if obj.customer and obj.customer.user:
+            return f"{obj.customer.user.first_name} {obj.customer.user.last_name}".strip()
+        return None
+
     
     def get_mechanic_details(self, obj):
         if obj.mechanic:
@@ -117,6 +125,7 @@ class ServiceRequestSerializer(serializers.ModelSerializer):
         
         instance.save()
 
+        
         # Handle vehicle updates
         current_vehicles = {v.id: v for v in instance.vehicles.all()}
         new_vehicles = []

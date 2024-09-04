@@ -1,26 +1,15 @@
 from rest_framework.permissions import BasePermission
 
-class IsMechanicOrCustomer(BasePermission):
+class IsMechanicOrOwner(BasePermission):
     """
-    Custom permission to only allow customers to view all mechanics and
-    restrict mechanics to access only their own data.
+    Custom permission to allow only mechanics to view their own details.
+    Other mechanics' data is not accessible.
     """
     
     def has_permission(self, request, view):
-        # Allow access if the request method is safe (GET, HEAD, OPTIONS)
-        if request.method in ['GET', 'HEAD', 'OPTIONS']:
-            return True
-        return request.user and request.user.is_authenticated
-    
+        # Ensure the user is authenticated and is a mechanic
+        return request.user and request.user.is_authenticated and hasattr(request.user, 'mechanic')
+
     def has_object_permission(self, request, view, obj):
-        # Allow all customers to view all mechanics
-        if request.user.is_customer:
-            return True
-        
-          # Check if the user is a mechanic
-        mechanic_profile = getattr(request.user, 'mechanic', None)
-        if mechanic_profile:
-            # Mechanics can only view or edit their own data
-            return obj.mechanic == mechanic_profile
-        
-        return False
+        # Only allow mechanics to access their own details
+        return obj == request.user.mechanic
