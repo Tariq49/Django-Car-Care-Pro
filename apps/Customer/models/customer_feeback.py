@@ -1,10 +1,11 @@
 from django.db import models
+from apps.Customer.models.customer_service_request import ServiceRequest
 
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 class CustomerFeedback(models.Model):
     
-    service_id = models.ForeignKey('ServiceRequest', on_delete=models.CASCADE)
+    service_id = models.ForeignKey(ServiceRequest, on_delete=models.CASCADE)
     rating = models.PositiveIntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(5)]
     )

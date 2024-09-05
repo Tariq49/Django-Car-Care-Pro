@@ -1,3 +1,3 @@
 from .customer import CustomerSerializer
-from .customer_service_request import ServiceRequestSerializer,MechanicPricePerServiceSerializer,MechanicSerializer,VehicleSerializer
+from .customer_service_request import ServiceRequestSerializer,VehicleSerializer
 from .customer_feedback import CustomerFeedbackSerializer

@@ -31,4 +31,5 @@ class Customer(models.Model):
         return full_name.strip()  
     
 
+
     

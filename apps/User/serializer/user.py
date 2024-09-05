@@ -9,6 +9,8 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id','username', 'first_name', 'last_name', 'email', 'date_joined', 'password']
         extra_kwargs = {'password': {'write_only': True}}
+        
+       
 
     def validate_username(self, value):
         # Check if we are updating an existing user and not changing the username

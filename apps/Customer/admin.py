@@ -26,7 +26,7 @@ class CustomerAdmin(admin.ModelAdmin):
 class ServiceRequestAdmin(admin.ModelAdmin):
     inlines = [VehicleInline] 
     
-    list_display = ('id','customer', 'vehicle_details', 'service_name', 'problem_description','mechanic_assigned', 'status', 'date_of_request')
+    list_display = ('id','customer', 'vehicle_details', 'service_name', 'problem_description','mechanic_assigned', 'status', 'date_of_request','due_date')
 
     def customer(self, obj):
         return obj.customer.user.username
@@ -43,6 +43,7 @@ class ServiceRequestAdmin(admin.ModelAdmin):
 
 class CustomerFeedbackAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
         'get_customer_name', 
         'service_name', 
         'problem_description', 
